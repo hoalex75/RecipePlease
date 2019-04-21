@@ -83,15 +83,10 @@
 		FA06B5BC226CE4300037B2CF /* RecipePlease */ = {
 			isa = PBXGroup;
 			children = (
-				FA06B5BD226CE4300037B2CF /* AppDelegate.swift */,
-				FA06B5BF226CE4300037B2CF /* ViewController.swift */,
-				FA06B5C1226CE4300037B2CF /* Main.storyboard */,
-				FA06B5C4226CE4330037B2CF /* Assets.xcassets */,
-				FA06B5C6226CE4330037B2CF /* LaunchScreen.storyboard */,
-				FA06B5C9226CE4330037B2CF /* Info.plist */,
-				FA06B5CF226CE61C0037B2CF /* SearchServices.swift */,
-				FA06B5D1226CE6E50037B2CF /* YummlyIdentifiers.json */,
-				FA06B5D3226CE75A0037B2CF /* YummlyIdentifiers.swift */,
+				FA06B5E3226CF8AA0037B2CF /* Model */,
+				FA06B5E4226CF8B80037B2CF /* View */,
+				FA06B5E5226CF8C00037B2CF /* Controller */,
+				FA06B5E6226CF8CF0037B2CF /* SupportingFiles */,
 			);
 			path = RecipePlease;
 			sourceTree = "<group>";
@@ -103,6 +98,43 @@
 				FA06B5DD226CE9EC0037B2CF /* Info.plist */,
 			);
 			path = RecipePleaseTests;
+			sourceTree = "<group>";
+		};
+		FA06B5E3226CF8AA0037B2CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA06B5CF226CE61C0037B2CF /* SearchServices.swift */,
+				FA06B5D3226CE75A0037B2CF /* YummlyIdentifiers.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA06B5E4226CF8B80037B2CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA06B5C1226CE4300037B2CF /* Main.storyboard */,
+				FA06B5C6226CE4330037B2CF /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA06B5E5226CF8C00037B2CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FA06B5BF226CE4300037B2CF /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FA06B5E6226CF8CF0037B2CF /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FA06B5D1226CE6E50037B2CF /* YummlyIdentifiers.json */,
+				FA06B5C9226CE4330037B2CF /* Info.plist */,
+				FA06B5C4226CE4330037B2CF /* Assets.xcassets */,
+				FA06B5BD226CE4300037B2CF /* AppDelegate.swift */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,7 +406,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 529LRG4ZS2;
-				INFOPLIST_FILE = RecipePlease/Info.plist;
+				INFOPLIST_FILE = RecipePlease/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -393,7 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 529LRG4ZS2;
-				INFOPLIST_FILE = RecipePlease/Info.plist;
+				INFOPLIST_FILE = RecipePlease/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
