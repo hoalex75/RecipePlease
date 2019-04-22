@@ -30,5 +30,4 @@ extension YummlyIdentifiers {
 struct YummlyAccess: Decodable {
     let appId: String
     let appKey: String
-
 }

@@ -39,7 +39,28 @@ public class SearchServices: YummlyIdentifiers {
         task?.resume()
     }
     
+    func formatingIngredients(ingredients: [String]) -> String {
+        var result = ""
+        for ingredient in ingredients {
+            result.append(encodeIngredients(ingredient))
+        }
+        return result
+    }
     
+    private func encodeIngredientsWithSpacesForSearchRequest(_ toEncode: String) -> String {
+        let result = toEncode.replacingOccurrences(of: " ", with: "%20")
+        return result
+    }
+    
+    private func encodeIngredients(_ toEncode: String) -> String {
+        var result = "&allowedIngredient[]="
+        var ingredient = toEncode
+        if toEncode.hasGotWhitespaces() {
+            ingredient = encodeIngredientsWithSpacesForSearchRequest(toEncode)
+        }
+        result = result + ingredient.lowercased()
+        return result
+    }
 }
 
 struct Result: Decodable {
