@@ -12,14 +12,13 @@ import Foundation
 public class SearchServices: YummlyIdentifiers {
     var yummlyAccess: YummlyAccess?
     private var task: URLSessionDataTask?
+    private let session = URLSession(configuration: .default)
     
     init() {
         self.yummlyAccess = getAccess()
     }
     
     func getImage(imageURL: URL,callback: @escaping (Bool, Data?) -> Void) {
-        let session = URLSession(configuration: .default)
-        
         task?.cancel()
         task = session.dataTask(with: imageURL, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
@@ -39,6 +38,8 @@ public class SearchServices: YummlyIdentifiers {
         })
         task?.resume()
     }
+    
+    
 }
 
 struct Result: Decodable {

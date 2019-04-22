@@ -30,4 +30,11 @@ class RecipePleaseTests: XCTestCase {
         XCTAssertNotNil(yummlyIdentifiers.yummlyAccess?.appKey)
     }
 
+    func testGivenStringWithSpaces_WhenCheckingIfItHasSpaces_ThenResultIsTrue() {
+        let stringWithSpaces = "I got"
+        
+        let result = stringWithSpaces.hasGotWhitespaces()
+        
+        XCTAssert(result)
+    }
 }
