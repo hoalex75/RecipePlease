@@ -18,13 +18,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func getImage() {
-        let url = URL(string: "https://lh3.googleusercontent.com/ivgTpXH4akDpObDA2OoYI-_oA6Cue7gO6YKnBEEk7hv1ev5obKOqhpwhQxjDpuQnyO5SGovVRKNNsjX2tCmdxcU=s90")
-        search.getImage(imageURL: url!) { [weak self] (success, data) in
-            if success {
-                guard let data = data else {
-                    return
-                }
-                self?.imageView.image = UIImage(data: data)
+        let ingredients = ["cognac","GarlIc"]
+        search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, results) in
+            if success, let results = results {
+                self?.search.getImage(imageURL: results[0].smallImageUrls[0], callback: { [weak self] (success, data) in
+                    if success, let data = data {
+                        self?.imageView.image = UIImage(data: data)
+                    }
+                })
             }
         }
     }
