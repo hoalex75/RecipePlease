@@ -8,9 +8,12 @@
 
 import Foundation
 
-struct Storage {
+class Storage {
     var result: Result?
-    static var shared = Storage()
-    
-    private init(){}
+    var ingredients: [String]? {
+        didSet {
+            hasChanged = true
+        }
+    }
+    var hasChanged: Bool = true
 }
