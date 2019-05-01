@@ -10,6 +10,7 @@ import Foundation
 
 struct Storage {
     var result: Result?
+    var ingredients: [String]?
     static var shared = Storage()
     
     private init(){}
