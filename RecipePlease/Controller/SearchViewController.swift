@@ -11,11 +11,16 @@ import UIKit
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchButton: UIButton!
+    
     private var storage = Storage()
+    private var searchService: SearchServices?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         storage.ingredients = []
+        searchService = SearchServices(storage: storage)
     }
 
     @IBAction func add() {
@@ -27,7 +32,45 @@ class SearchViewController: UIViewController {
     }
     
     @IBAction func search() {
-        performSegue(withIdentifier: "segueToResults", sender: nil)
+        searchRecipes()
+    }
+    
+    private func toggleActivityIndicator(shown: Bool) {
+        activityIndicator.isHidden = shown
+        searchButton.isHidden = !shown
+    }
+    
+    private func searchRecipes() {
+        if storage.hasChanged == false {
+            showResults()
+        } else {
+            searchIfIngredientsIsNotNil()
+        }
+    }
+    
+    private func searchIfIngredientsIsNotNil() {
+        guard let ingredients = storage.ingredients else { return }
+        
+        if ingredients.count > 0 {
+            searchWithIngredients(ingredients)
+        } else {
+            // TODO: ALERT
+        }
+    }
+    
+    private func searchWithIngredients(_ ingredients: [String]) {
+        guard let search = searchService else { return }
+        toggleActivityIndicator(shown: false)
+        search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, _) in
+            if success {
+                print("ok")
+                self?.showResults()
+            } else {
+                //TODO: ALERT
+                print("nonOk")
+            }
+            self?.toggleActivityIndicator(shown: true)
+        }
     }
     
     private func addIngredientToList() {
@@ -46,8 +89,13 @@ class SearchViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToResults" {
             let segueVC = segue.destination as! ResultsViewController
+            segueVC.search = searchService
             segueVC.storage = storage
         }
+    }
+    
+    private func showResults() {
+        performSegue(withIdentifier: "segueToResults", sender: nil)
     }
 }
 

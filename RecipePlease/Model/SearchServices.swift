@@ -14,7 +14,7 @@ public class SearchServices: YummlyIdentifiers {
     private var task: URLSessionDataTask?
     private let session = URLSession(configuration: .default)
     private let stringURL = "https://api.yummly.com/v1/api/recipes"
-    private var storage: Storage
+    var storage: Storage
     
     init(storage: Storage) {
         self.storage = storage
@@ -24,14 +24,14 @@ public class SearchServices: YummlyIdentifiers {
         }
     }
     
-    func getResultsWithIngredients(ingredients: [String], completionHandler: @escaping (Bool, [RecipeResult]?) -> Void) {
+    func getResultsWithIngredients(ingredients: [String], completionHandler: @escaping (Bool, Result?) -> Void) {
         var body = "?_app_id=\(yummlyAccess.appId)&_app_key=\(yummlyAccess.appKey)"
         body += formatingIngredients(ingredients: ingredients)
         let urlOnWhichRequest = URL(string: stringURL + body)
         guard let url = urlOnWhichRequest else { return }
         print(url)
         task?.cancel()
-        task = session.dataTask(with: url, completionHandler: { (data, response, error) in
+        task = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     if let error = error {
@@ -51,8 +51,9 @@ public class SearchServices: YummlyIdentifiers {
                     return
                 }
                 
-                self.storage.result = result
-                completionHandler(true, result.matches)
+                self?.storage.result = result
+                self?.storage.hasChanged = false
+                completionHandler(true, result)
             }
         })
         task?.resume()

@@ -134,15 +134,20 @@
                                     <outlet property="delegate" destination="WAo-Cc-RA7" id="OlD-Bx-qnk"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="b2D-Th-G1x">
+                                <rect key="frame" x="177.5" y="614" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="d3x-4L-gCC" firstAttribute="top" secondItem="MuC-NC-9sL" secondAttribute="bottom" constant="10" id="5DQ-SD-gyR"/>
+                            <constraint firstItem="b2D-Th-G1x" firstAttribute="centerY" secondItem="d3x-4L-gCC" secondAttribute="centerY" id="GPb-80-SvT"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="trailing" secondItem="d3x-4L-gCC" secondAttribute="trailing" constant="20" id="H40-2s-6Sn"/>
                             <constraint firstItem="EiZ-sM-mtr" firstAttribute="top" secondItem="OhJ-c4-oHA" secondAttribute="top" constant="10" id="IKV-WR-aR7"/>
                             <constraint firstItem="MuC-NC-9sL" firstAttribute="top" secondItem="EiZ-sM-mtr" secondAttribute="bottom" constant="10" id="Nkz-8u-xzl"/>
                             <constraint firstItem="EiZ-sM-mtr" firstAttribute="leading" secondItem="OhJ-c4-oHA" secondAttribute="leading" constant="10" id="QUd-mK-PZt"/>
+                            <constraint firstItem="b2D-Th-G1x" firstAttribute="centerX" secondItem="d3x-4L-gCC" secondAttribute="centerX" id="VFM-hI-aCc"/>
                             <constraint firstItem="MuC-NC-9sL" firstAttribute="leading" secondItem="OhJ-c4-oHA" secondAttribute="leading" constant="40" id="ZBF-la-j46"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="bottom" secondItem="d3x-4L-gCC" secondAttribute="bottom" constant="20" id="hYL-QG-hVt"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="trailing" secondItem="MuC-NC-9sL" secondAttribute="trailing" constant="40" id="hpn-py-9C9"/>
@@ -156,6 +161,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Recipeplease" id="xPY-Pg-zX1"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="b2D-Th-G1x" id="DJN-6k-RU8"/>
+                        <outlet property="searchButton" destination="d3x-4L-gCC" id="0vu-wq-208"/>
                         <outlet property="searchField" destination="ABN-jZ-HOL" id="lo8-zS-Lro"/>
                         <outlet property="tableView" destination="MuC-NC-9sL" id="z6T-Q2-RVf"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueToResults" id="B2o-bq-4xL"/>

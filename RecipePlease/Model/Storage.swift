@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct Storage {
+class Storage {
     var result: Result?
-    var ingredients: [String]?
+    var ingredients: [String]? {
+        didSet {
+            hasChanged = true
+        }
+    }
+    var hasChanged: Bool = true
 }
