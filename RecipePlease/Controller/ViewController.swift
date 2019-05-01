@@ -54,7 +54,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.recipeNameLabel.text = result.recipeName
-        cell.ingredientsLabel.text = result.ingredients[0]
+        cell.ingredientsLabel.text = result.ingredientsToString()
         cell.imageUrl = result.imageUrlsBySize["90"]
         return cell
     }

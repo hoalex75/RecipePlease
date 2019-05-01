@@ -119,6 +119,18 @@ struct RecipeResult: Decodable {
     let totalTimeInSeconds: Int
     let smallImageUrls: [URL]
     let imageUrlsBySize: [String:URL]
+    
+    func ingredientsToString() -> String {
+        var result = ""
+        for ingredient in ingredients {
+            result.append(ingredient.capitalized)
+            result.append(", ")
+        }
+        result = result.trimmingCharacters(in: .whitespaces)
+        result = String(result.dropLast())
+        
+        return result
+    }
 }
 
 struct Attribution: Decodable {

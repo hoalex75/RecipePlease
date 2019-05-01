@@ -53,4 +53,12 @@ class RecipePleaseTests: XCTestCase {
         
         XCTAssertEqual(result, "&allowedIngredient[]=soup&allowedIngredient[]=onion%20soup&allowedIngredient[]=garlic%20cloves&allowedIngredient[]=cognac")
     }
+    
+    func testGivenTabOfIngredients_WhenIngredientsToString_ThenHaveStringOfIngredients() {
+        let result = RecipeResult(ingredients: ["butter","gArlic","orange"], id: "12", recipeName: "Soup", totalTimeInSeconds: 123, smallImageUrls: [URL(fileURLWithPath: "")], imageUrlsBySize: ["re" : URL(fileURLWithPath: "")])
+        
+        let ingredientsString = result.ingredientsToString()
+        
+        XCTAssertEqual(ingredientsString, "Butter, Garlic, Orange")
+    }
 }
