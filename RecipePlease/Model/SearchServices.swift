@@ -14,8 +14,10 @@ public class SearchServices: YummlyIdentifiers {
     private var task: URLSessionDataTask?
     private let session = URLSession(configuration: .default)
     private let stringURL = "https://api.yummly.com/v1/api/recipes"
+    private var storage: Storage
     
-    init() {
+    init(storage: Storage) {
+        self.storage = storage
         yummlyAccess = YummlyAccess(appId: "", appKey: "")
         if let yumm = self.getAccess() {
             yummlyAccess = yumm
@@ -49,7 +51,7 @@ public class SearchServices: YummlyIdentifiers {
                     return
                 }
                 
-                Storage.shared.result = result
+                self.storage.result = result
                 completionHandler(true, result.matches)
             }
         })

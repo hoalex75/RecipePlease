@@ -9,17 +9,22 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
-    private var search = SearchServices()
+    private var search: SearchServices?
+    var storage: Storage?
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerTableViewCells()
         getResults()
+        if let storage = storage {
+           search = SearchServices(storage: storage)
+        }
     }
     
     private func getResults() {
         let ingredients = ["garlic","cognac"]
+        guard let search = search else { return }
         search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, results) in
             if success, let results = results {
                 print("ok")
@@ -42,12 +47,14 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let result = Storage.shared.result else { return 0 }
+        guard let storage = storage else { return 0 }
+        guard let result = storage.result else { return 0 }
         return result.matches.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let result = Storage.shared.result?.matches[indexPath.row] else {
+        guard let storage = storage else { return UITableViewCell() }
+        guard let result = storage.result?.matches[indexPath.row] else {
             return UITableViewCell()
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as? ResultCell else {

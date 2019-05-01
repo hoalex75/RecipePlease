@@ -23,7 +23,7 @@ class ResultCell: UITableViewCell {
     }
     
     private func imageViewSetup(url: URL) {
-        let search = SearchServices()
+        let search = SearchServices(storage: Storage())
         search.getImage(imageURL: url) { [weak self] (success, data) in
             if success, let data = data {
                 self?.setImage(data: data)
