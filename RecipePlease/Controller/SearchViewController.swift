@@ -60,6 +60,7 @@ class SearchViewController: UIViewController {
     
     private func searchWithIngredients(_ ingredients: [String]) {
         guard let search = searchService else { return }
+        
         toggleActivityIndicator(shown: false)
         search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, _) in
             if success {
@@ -75,6 +76,7 @@ class SearchViewController: UIViewController {
     
     private func addIngredientToList() {
         guard let text = searchField.text else { return }
+        
         if text.count > 0 {
             storage.ingredients?.append(text)
             reloadTableView()
@@ -102,14 +104,17 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let ingredients = storage.ingredients else { return 0 }
+        
         return ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let ingredients = storage.ingredients else { return UITableViewCell() }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
         let ingredientString = ingredients[indexPath.row]
         cell.textLabel?.text = "- " + ingredientString.capitalized
+        
         return cell
     }
     
@@ -129,6 +134,7 @@ extension SearchViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return true
     }
 }

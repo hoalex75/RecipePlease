@@ -33,6 +33,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let storage = storage else { return 0 }
         guard let result = storage.result else { return 0 }
+        
         return result.matches.count
     }
     
@@ -44,6 +45,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as? ResultCell else {
             return UITableViewCell()
         }
+        
         cellInitialize(cell, result: result)
         return cell
     }
