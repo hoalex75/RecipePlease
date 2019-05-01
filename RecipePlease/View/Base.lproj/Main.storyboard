@@ -18,24 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkI-uN-bsl">
-                                <rect key="frame" x="164" y="368" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPF-oL-4A2">
+                                <rect key="frame" x="0.0" y="28" width="375" height="631"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="getImage" destination="BYZ-38-t0r" eventType="touchUpInside" id="95b-pE-TZI"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="NUL-9t-CE1"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="fAo-JI-lUT"/>
                                 </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMi-lW-0iH">
-                                <rect key="frame" x="89" y="157" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cPF-oL-4A2" secondAttribute="bottom" constant="8" id="Nbq-Bz-Ztc"/>
+                            <constraint firstItem="cPF-oL-4A2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QUt-bg-cce"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cPF-oL-4A2" secondAttribute="trailing" id="yid-0q-7ox"/>
+                            <constraint firstItem="cPF-oL-4A2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="zEA-tK-LuG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="PMi-lW-0iH" id="BHW-eA-dOh"/>
+                        <outlet property="tableView" destination="cPF-oL-4A2" id="3MD-fL-gGg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

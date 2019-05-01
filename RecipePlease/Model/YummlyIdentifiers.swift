@@ -9,7 +9,7 @@
 import Foundation
 
 protocol YummlyIdentifiers {
-    var yummlyAccess: YummlyAccess? { get }
+    var yummlyAccess: YummlyAccess { get }
     
     func getAccess() -> YummlyAccess?
 }
