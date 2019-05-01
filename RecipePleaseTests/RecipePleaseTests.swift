@@ -18,17 +18,20 @@ class RecipePleaseTests: XCTestCase {
 
     func testGivenYummlyInstance_WhenGetAccess_ThenAccessAreCorrect() {
         struct TestYummlyInstance: YummlyIdentifiers {
-            var yummlyAccess: YummlyAccess?
+            var yummlyAccess: YummlyAccess
             
             init() {
-                yummlyAccess = getAccess()
+                yummlyAccess = YummlyAccess(appId: "", appKey: "")
+                if let yumm = getAccess() {
+                    self.yummlyAccess = yumm
+                }
             }
         }
         
         let yummlyIdentifiers = TestYummlyInstance()
         
-        XCTAssertNotNil(yummlyIdentifiers.yummlyAccess?.appId)
-        XCTAssertNotNil(yummlyIdentifiers.yummlyAccess?.appKey)
+        XCTAssertNotNil(yummlyIdentifiers.yummlyAccess.appId)
+        XCTAssertNotNil(yummlyIdentifiers.yummlyAccess.appKey)
     }
 
     func testGivenStringWithSpaces_WhenCheckingIfItHasSpaces_ThenResultIsTrue() {

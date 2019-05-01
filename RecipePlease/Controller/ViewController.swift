@@ -9,26 +9,58 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
     private var search = SearchServices()
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        registerTableViewCells()
+        getResults()
     }
-
-    @IBAction func getImage() {
-        let ingredients = ["cognac","GarlIc"]
+    
+    private func getResults() {
+        let ingredients = ["garlic","cognac"]
         search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, results) in
             if success, let results = results {
-                self?.search.getImage(imageURL: results[0].smallImageUrls[0], callback: { [weak self] (success, data) in
-                    if success, let data = data {
-                        self?.imageView.image = UIImage(data: data)
-                    }
-                })
+                print("ok")
+                self?.tableView.reloadData()
+            } else {
+                print("nonOk")
             }
         }
     }
     
+    private func registerTableViewCells() {
+        let resultCell = UINib(nibName: "ResultCell", bundle: nil)
+        tableView.register(resultCell, forCellReuseIdentifier: "ResultCell")
+    }
 }
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let result = Storage.shared.result else { return 0 }
+        return result.matches.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let result = Storage.shared.result?.matches[indexPath.row] else {
+            return UITableViewCell()
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as? ResultCell else {
+            return UITableViewCell()
+        }
+        cell.recipeNameLabel.text = result.recipeName
+        cell.ingredientsLabel.text = result.ingredients[0]
+        cell.imageUrl = result.imageUrlsBySize["90"]
+        return cell
+    }
+    
+    
+}
+
+
 

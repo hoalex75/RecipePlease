@@ -32,6 +32,9 @@ public class SearchServices: YummlyIdentifiers {
         task = session.dataTask(with: url, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
+                    if let error = error {
+                        print(error)
+                    }
                     completionHandler(false, nil)
                     return
                 }
@@ -46,16 +49,15 @@ public class SearchServices: YummlyIdentifiers {
                     return
                 }
                 
-                let results = result.matches
-                completionHandler(true, results)
+                Storage.shared.result = result
+                completionHandler(true, result.matches)
             }
         })
         task?.resume()
     }
     
     func getImage(imageURL: URL,callback: @escaping (Bool, Data?) -> Void) {
-        task?.cancel()
-        task = session.dataTask(with: imageURL, completionHandler: { (data, response, error) in
+        let taskDiff = session.dataTask(with: imageURL, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     callback(false, nil)
@@ -71,7 +73,7 @@ public class SearchServices: YummlyIdentifiers {
                 callback(true, data)
             }
         })
-        task?.resume()
+        taskDiff.resume()
     }
     
     func formatingIngredients(ingredients: [String]) -> String {
@@ -116,6 +118,7 @@ struct RecipeResult: Decodable {
     let recipeName: String
     let totalTimeInSeconds: Int
     let smallImageUrls: [URL]
+    let imageUrlsBySize: [String:URL]
 }
 
 struct Attribution: Decodable {

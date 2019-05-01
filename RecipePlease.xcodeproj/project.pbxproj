@@ -17,6 +17,9 @@
 		FA06B5D4226CE75A0037B2CF /* YummlyIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B5D3226CE75A0037B2CF /* YummlyIdentifiers.swift */; };
 		FA06B5DC226CE9EC0037B2CF /* RecipePleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B5DB226CE9EC0037B2CF /* RecipePleaseTests.swift */; };
 		FA06B5E8226DB8F20037B2CF /* VariousExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B5E7226DB8F20037B2CF /* VariousExtensions.swift */; };
+		FA06B5EA2279AF9F0037B2CF /* ResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA06B5E92279AF9F0037B2CF /* ResultCell.xib */; };
+		FA06B5EC2279B04E0037B2CF /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06B5EB2279B04E0037B2CF /* ResultCell.swift */; };
+		FAE2F88B2279B211001399D8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88A2279B211001399D8 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		FA06B5DB226CE9EC0037B2CF /* RecipePleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePleaseTests.swift; sourceTree = "<group>"; };
 		FA06B5DD226CE9EC0037B2CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA06B5E7226DB8F20037B2CF /* VariousExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariousExtensions.swift; sourceTree = "<group>"; };
+		FA06B5E92279AF9F0037B2CF /* ResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultCell.xib; sourceTree = "<group>"; };
+		FA06B5EB2279B04E0037B2CF /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		FAE2F88A2279B211001399D8 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,7 @@
 			children = (
 				FA06B5CF226CE61C0037B2CF /* SearchServices.swift */,
 				FA06B5D3226CE75A0037B2CF /* YummlyIdentifiers.swift */,
+				FAE2F88A2279B211001399D8 /* Storage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +123,7 @@
 			children = (
 				FA06B5C1226CE4300037B2CF /* Main.storyboard */,
 				FA06B5C6226CE4330037B2CF /* LaunchScreen.storyboard */,
+				FA06B5E92279AF9F0037B2CF /* ResultCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				FA06B5BF226CE4300037B2CF /* ViewController.swift */,
+				FA06B5EB2279B04E0037B2CF /* ResultCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,6 +234,7 @@
 				FA06B5C8226CE4330037B2CF /* LaunchScreen.storyboard in Resources */,
 				FA06B5C5226CE4330037B2CF /* Assets.xcassets in Resources */,
 				FA06B5C3226CE4300037B2CF /* Main.storyboard in Resources */,
+				FA06B5EA2279AF9F0037B2CF /* ResultCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA06B5C0226CE4300037B2CF /* ViewController.swift in Sources */,
+				FAE2F88B2279B211001399D8 /* Storage.swift in Sources */,
 				FA06B5D4226CE75A0037B2CF /* YummlyIdentifiers.swift in Sources */,
+				FA06B5EC2279B04E0037B2CF /* ResultCell.swift in Sources */,
 				FA06B5E8226DB8F20037B2CF /* VariousExtensions.swift in Sources */,
 				FA06B5BE226CE4300037B2CF /* AppDelegate.swift in Sources */,
 				FA06B5D0226CE61C0037B2CF /* SearchServices.swift in Sources */,
