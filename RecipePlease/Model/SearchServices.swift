@@ -52,7 +52,7 @@ public class SearchServices: YummlyIdentifiers {
                 }
                 
                 self?.storage.result = result
-                self?.storage.hasChanged = false
+                self?.storage.ingredientHaveChanged = false
                 completionHandler(true, result)
             }
         })
@@ -122,6 +122,7 @@ struct RecipeResult: Decodable {
     let totalTimeInSeconds: Int
     let smallImageUrls: [URL]
     let imageUrlsBySize: [String:URL]
+    let rating: Int?
     
     func ingredientsToString() -> String {
         var result = ""

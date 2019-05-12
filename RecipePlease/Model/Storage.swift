@@ -12,8 +12,8 @@ class Storage {
     var result: Result?
     var ingredients: [String]? {
         didSet {
-            hasChanged = true
+            ingredientHaveChanged = true
         }
     }
-    var hasChanged: Bool = true
+    var ingredientHaveChanged: Bool = true
 }

@@ -41,7 +41,7 @@ class SearchViewController: UIViewController {
     }
     
     private func searchRecipes() {
-        if storage.hasChanged == false {
+        if storage.ingredientHaveChanged == false {
             showResults()
         } else {
             searchIfIngredientsIsNotNil()
