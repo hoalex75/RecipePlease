@@ -205,11 +205,37 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="cPF-oL-4A2" id="3MD-fL-gGg"/>
+                        <segue destination="CjU-dw-NA7" kind="show" identifier="segueToRecipe" id="0mR-Nh-cOP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-220" y="28"/>
+        </scene>
+        <!--Recipe View Controller-->
+        <scene sceneID="BgM-Ka-GDS">
+            <objects>
+                <viewController id="CjU-dw-NA7" customClass="RecipeViewController" customModule="RecipePlease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Q2-wA-PJo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Du-Dp-Gcn">
+                                <rect key="frame" x="80" y="160" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="EmX-4G-sho"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="5Du-Dp-Gcn" id="dTO-Yq-pH8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lVQ-yV-ABa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="524" y="37.331334332833585"/>
         </scene>
     </scenes>
 </document>

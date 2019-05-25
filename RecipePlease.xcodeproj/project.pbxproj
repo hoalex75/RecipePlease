@@ -22,6 +22,7 @@
 		FA20C39422997899002241E4 /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA20C39322997899002241E4 /* RatingView.xib */; };
 		FA20C396229978B1002241E4 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA20C395229978B1002241E4 /* RatingView.swift */; };
 		FA4714CB22998F0B00B61F6B /* YummlyResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4714CA22998F0B00B61F6B /* YummlyResponseModels.swift */; };
+		FA4714CD2299A20600B61F6B /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4714CC2299A20600B61F6B /* RecipeViewController.swift */; };
 		FAE2F88B2279B211001399D8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88A2279B211001399D8 /* Storage.swift */; };
 		FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88C2279D40D001399D8 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		FA20C39322997899002241E4 /* RatingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
 		FA20C395229978B1002241E4 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		FA4714CA22998F0B00B61F6B /* YummlyResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyResponseModels.swift; sourceTree = "<group>"; };
+		FA4714CC2299A20600B61F6B /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		FAE2F88A2279B211001399D8 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		FAE2F88C2279D40D001399D8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 			children = (
 				FAE2F88C2279D40D001399D8 /* SearchViewController.swift */,
 				FA06B5BF226CE4300037B2CF /* ResultsViewController.swift */,
+				FA4714CC2299A20600B61F6B /* RecipeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */,
 				FA20C396229978B1002241E4 /* RatingView.swift in Sources */,
 				FA06B5D4226CE75A0037B2CF /* YummlyIdentifiers.swift in Sources */,
+				FA4714CD2299A20600B61F6B /* RecipeViewController.swift in Sources */,
 				FA4714CB22998F0B00B61F6B /* YummlyResponseModels.swift in Sources */,
 				FA06B5EC2279B04E0037B2CF /* ResultCell.swift in Sources */,
 				FA06B5E8226DB8F20037B2CF /* VariousExtensions.swift in Sources */,

@@ -50,6 +50,18 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let result = storage?.result else { return }
+        search?.getRecipe(recipeId: result.matches[indexPath.row].id, completionHandler: { success in
+            if success {
+                self.showRecipe()
+            } else {
+                // TODO
+                print("isNogood")
+            }
+        })
+    }
+    
     private func cellInitialize(_ cell: ResultCell, result: RecipeResult) {
         cell.recipeNameLabel.text = result.recipeName
         cell.ingredientsLabel.text = result.ingredientsToString()
@@ -59,6 +71,21 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.ratingView.likeLabel.text = "\(result.totalTimeInSeconds)"
         cell.search = search
         cell.imageUrl = result.imageUrlsBySize["90"]
+    }
+}
+
+extension ResultsViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "segueToRecipe",
+            let segueVC = segue.destination as? RecipeViewController,
+            let storage = storage{
+            segueVC.search = search
+            segueVC.recipe = storage.recipe
+        }
+    }
+    
+    func showRecipe() {
+        performSegue(withIdentifier: "segueToRecipe", sender: nil)
     }
 }
 

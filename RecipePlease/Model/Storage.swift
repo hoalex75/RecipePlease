@@ -15,5 +15,6 @@ class Storage {
             ingredientHaveChanged = true
         }
     }
+    var recipe: Recipe?
     var ingredientHaveChanged: Bool = true
 }

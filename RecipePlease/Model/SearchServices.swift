@@ -15,7 +15,7 @@ public class SearchServices: YummlyIdentifiers {
     private let session = URLSession(configuration: .default)
     private let stringURLSearchForRecipes = "https://api.yummly.com/v1/api/recipes"
     // recipeId, appID, appKey
-    private let stringURLDisplayRecipe = "http://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@"
+    private let stringURLDisplayRecipe = "https://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@"
     var storage: Storage
     
     init(storage: Storage) {
@@ -106,26 +106,35 @@ public class SearchServices: YummlyIdentifiers {
 }
 
 extension SearchServices {
-    func getRecipe(recipeId: String) {
+    func getRecipe(recipeId: String, completionHandler: @escaping ((Bool) -> Void)) {
         let urlRequest = String(format: stringURLDisplayRecipe, recipeId, yummlyAccess.appId, yummlyAccess.appKey)
         let urlOptional = URL(string: urlRequest)
         guard let url = urlOptional else { return }
         task?.cancel()
-        task = session.dataTask(with: url, completionHandler: { data, response, error in
+        task = session.dataTask(with: url, completionHandler: { [weak self] data, response, error in
             DispatchQueue.main.async {
-                guard let data = data, error != nil else {
+                guard let data = data, error == nil else {
+                    completionHandler(false)
                     return
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    completionHandler(false)
                     return
                 }
                 
                 guard let recipe = try? JSONDecoder().decode(Recipe.self, from: data) else {
+                    completionHandler(false)
                     return
                 }
-                
+                self?.storage.recipe = recipe
+                print(recipe.name)
+                for ingredients in recipe.ingredientLines {
+                    print("\(ingredients)\n")
+                }
+                completionHandler(true)
             }
         })
+        task?.resume()
     }
 }

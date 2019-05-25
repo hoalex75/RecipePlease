@@ -61,7 +61,7 @@ struct Recipe: Decodable {
 struct RecipeImages: Decodable {
     let hostedSmallUrl: URL?
     let hostedMediumUrl: URL?
-    let hostedLargeIrl: URL?
+    let hostedLargeUrl: URL?
     let imageUrlsBySize: [String : URL]?
 }
 
