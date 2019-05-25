@@ -53,8 +53,12 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     private func cellInitialize(_ cell: ResultCell, result: RecipeResult) {
         cell.recipeNameLabel.text = result.recipeName
         cell.ingredientsLabel.text = result.ingredientsToString()
+        cell.ratingView.topImageView.image = UIImage(named: "Clock")
+        cell.ratingView.bottomImageView.image = UIImage(named: "Clock")
+        cell.ratingView.ratingLabel.text = "\(result.rating)"
+        cell.ratingView.likeLabel.text = "\(result.totalTimeInSeconds)"
         cell.search = search
-        cell.imageUrl = result.smallImageUrls[0]
+        cell.imageUrl = result.imageUrlsBySize["90"]
     }
 }
 
