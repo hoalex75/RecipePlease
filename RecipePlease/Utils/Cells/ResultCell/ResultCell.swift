@@ -9,6 +9,8 @@
 import UIKit
 
 class ResultCell: UITableViewCell {
+    
+    @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!

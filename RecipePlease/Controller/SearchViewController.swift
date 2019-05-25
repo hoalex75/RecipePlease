@@ -89,8 +89,7 @@ class SearchViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToResults" {
-            let segueVC = segue.destination as! ResultsViewController
+        if segue.identifier == "segueToResults", let segueVC = segue.destination as? ResultsViewController {
             segueVC.search = searchService
             segueVC.storage = storage
         }

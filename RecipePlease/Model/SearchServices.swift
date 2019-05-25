@@ -13,7 +13,9 @@ public class SearchServices: YummlyIdentifiers {
     var yummlyAccess: YummlyAccess
     private var task: URLSessionDataTask?
     private let session = URLSession(configuration: .default)
-    private let stringURL = "https://api.yummly.com/v1/api/recipes"
+    private let stringURLSearchForRecipes = "https://api.yummly.com/v1/api/recipes"
+    // recipeId, appID, appKey
+    private let stringURLDisplayRecipe = "http://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@"
     var storage: Storage
     
     init(storage: Storage) {
@@ -27,7 +29,7 @@ public class SearchServices: YummlyIdentifiers {
     func getResultsWithIngredients(ingredients: [String], completionHandler: @escaping (Bool, Result?) -> Void) {
         var body = "?_app_id=\(yummlyAccess.appId)&_app_key=\(yummlyAccess.appKey)"
         body += formatingIngredients(ingredients: ingredients)
-        let urlOnWhichRequest = URL(string: stringURL + body)
+        let urlOnWhichRequest = URL(string: stringURLSearchForRecipes + body)
         guard let url = urlOnWhichRequest else { return }
         print(url)
         task?.cancel()
@@ -103,42 +105,27 @@ public class SearchServices: YummlyIdentifiers {
     }
 }
 
-struct Result: Decodable {
-    let criteria: Criteria
-    let matches: [RecipeResult]
-    let attribution: Attribution
-}
-
-struct Criteria: Decodable {
-    let q: String?
-    let allowedIngredient: [String]?
-    let excludedIngredient: [String]?
-}
-
-struct RecipeResult: Decodable {
-    let ingredients: [String]
-    let id: String
-    let recipeName: String
-    let totalTimeInSeconds: Int
-    let smallImageUrls: [URL]
-    let imageUrlsBySize: [String:URL]
-    let rating: Int?
-    
-    func ingredientsToString() -> String {
-        var result = ""
-        for ingredient in ingredients {
-            result.append(ingredient.capitalized)
-            result.append(", ")
-        }
-        result = result.trimmingCharacters(in: .whitespaces)
-        result = String(result.dropLast())
-        
-        return result
+extension SearchServices {
+    func getRecipe(recipeId: String) {
+        let urlRequest = String(format: stringURLDisplayRecipe, recipeId, yummlyAccess.appId, yummlyAccess.appKey)
+        let urlOptional = URL(string: urlRequest)
+        guard let url = urlOptional else { return }
+        task?.cancel()
+        task = session.dataTask(with: url, completionHandler: { data, response, error in
+            DispatchQueue.main.async {
+                guard let data = data, error != nil else {
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    return
+                }
+                
+                guard let recipe = try? JSONDecoder().decode(Recipe.self, from: data) else {
+                    return
+                }
+                
+            }
+        })
     }
-}
-
-struct Attribution: Decodable {
-    let url: URL
-    let text: String
-    let logo: URL
 }

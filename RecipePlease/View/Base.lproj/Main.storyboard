@@ -147,11 +147,11 @@
                             <constraint firstItem="EiZ-sM-mtr" firstAttribute="top" secondItem="OhJ-c4-oHA" secondAttribute="top" constant="10" id="IKV-WR-aR7"/>
                             <constraint firstItem="MuC-NC-9sL" firstAttribute="top" secondItem="EiZ-sM-mtr" secondAttribute="bottom" constant="10" id="Nkz-8u-xzl"/>
                             <constraint firstItem="EiZ-sM-mtr" firstAttribute="leading" secondItem="OhJ-c4-oHA" secondAttribute="leading" constant="10" id="QUd-mK-PZt"/>
-                            <constraint firstItem="b2D-Th-G1x" firstAttribute="centerX" secondItem="d3x-4L-gCC" secondAttribute="centerX" id="VFM-hI-aCc"/>
                             <constraint firstItem="MuC-NC-9sL" firstAttribute="leading" secondItem="OhJ-c4-oHA" secondAttribute="leading" constant="40" id="ZBF-la-j46"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="bottom" secondItem="d3x-4L-gCC" secondAttribute="bottom" constant="20" id="hYL-QG-hVt"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="trailing" secondItem="MuC-NC-9sL" secondAttribute="trailing" constant="40" id="hpn-py-9C9"/>
                             <constraint firstItem="OhJ-c4-oHA" firstAttribute="trailing" secondItem="EiZ-sM-mtr" secondAttribute="trailing" constant="10" id="jEx-Ef-Mfm"/>
+                            <constraint firstItem="b2D-Th-G1x" firstAttribute="centerX" secondItem="xUd-Ea-LYu" secondAttribute="centerX" id="y2w-Y3-Snd"/>
                             <constraint firstItem="d3x-4L-gCC" firstAttribute="leading" secondItem="OhJ-c4-oHA" secondAttribute="leading" constant="20" id="zSL-Xw-vAM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OhJ-c4-oHA"/>
@@ -185,7 +185,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPF-oL-4A2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPF-oL-4A2">
                                 <rect key="frame" x="0.0" y="72" width="375" height="587"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
