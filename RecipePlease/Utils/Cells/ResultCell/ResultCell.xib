@@ -41,22 +41,27 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="teb-R8-UXV" customClass="RatingView" customModule="RecipePlease">
-                        <rect key="frame" x="257" y="11" width="113" height="34"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teb-R8-UXV" customClass="RatingView" customModule="RecipePlease">
+                        <rect key="frame" x="285" y="10" width="80" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="teb-R8-UXV" secondAttribute="height" multiplier="32:16" id="6M6-2m-VS8"/>
+                            <constraint firstAttribute="height" constant="40" id="rFb-0D-FWb"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ys0-QN-ldY" firstAttribute="leading" secondItem="1AA-t1-qQc" secondAttribute="leading" id="0hG-qA-2xf"/>
                     <constraint firstAttribute="bottom" secondItem="v6S-Zg-gXv" secondAttribute="bottom" constant="5" id="8Mk-DJ-NyF"/>
                     <constraint firstItem="ys0-QN-ldY" firstAttribute="top" secondItem="1AA-t1-qQc" secondAttribute="top" id="A1n-B4-nB7"/>
+                    <constraint firstAttribute="trailing" secondItem="teb-R8-UXV" secondAttribute="trailing" constant="10" id="Atq-Vq-ymb"/>
                     <constraint firstAttribute="trailing" secondItem="ys0-QN-ldY" secondAttribute="trailing" id="E6h-Nb-fTX"/>
                     <constraint firstItem="v6S-Zg-gXv" firstAttribute="top" secondItem="1AA-t1-qQc" secondAttribute="top" constant="44.5" id="EBD-nN-3Oc"/>
                     <constraint firstItem="v6S-Zg-gXv" firstAttribute="leading" secondItem="1AA-t1-qQc" secondAttribute="leading" constant="5" id="FXu-WS-zlz"/>
                     <constraint firstItem="ys0-QN-ldY" firstAttribute="centerY" secondItem="6tW-l8-VOQ" secondAttribute="centerY" id="K5I-Tc-aSH"/>
                     <constraint firstAttribute="bottom" secondItem="ys0-QN-ldY" secondAttribute="bottom" id="S7d-kz-78x"/>
                     <constraint firstItem="ys0-QN-ldY" firstAttribute="centerX" secondItem="6tW-l8-VOQ" secondAttribute="centerX" id="bN1-Ko-sdA"/>
+                    <constraint firstItem="teb-R8-UXV" firstAttribute="top" secondItem="1AA-t1-qQc" secondAttribute="top" constant="10" id="jd6-6d-zyT"/>
                     <constraint firstAttribute="trailing" secondItem="v6S-Zg-gXv" secondAttribute="trailing" constant="5" id="wwB-hB-96r"/>
                 </constraints>
             </tableViewCellContentView>

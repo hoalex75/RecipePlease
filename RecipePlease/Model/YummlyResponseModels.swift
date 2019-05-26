@@ -54,6 +54,7 @@ struct Recipe: Decodable {
     let source: RecipeSource
     let prepTime: String?
     let cookTime: String?
+    let totalTime: String?
     let rating: Int?
     let ingredientLines: [String]
 }

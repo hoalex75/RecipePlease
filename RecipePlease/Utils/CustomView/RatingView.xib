@@ -14,9 +14,9 @@
             <connections>
                 <outlet property="bottomImageView" destination="qdX-5f-Q4C" id="WST-dM-7VM"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="djA-JC-uci"/>
-                <outlet property="likeLabel" destination="dvC-Vj-2v5" id="w5b-zq-2ge"/>
                 <outlet property="ratingLabel" destination="NVV-27-IsR" id="eXe-tO-OLy"/>
                 <outlet property="topImageView" destination="fho-jB-6Ih" id="ywA-7S-tzg"/>
+                <outlet property="totalTimeLabel" destination="dvC-Vj-2v5" id="w5b-zq-2ge"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,7 +30,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yIr-XJ-bwS">
                             <rect key="frame" x="0.0" y="0.0" width="137" height="31"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fho-jB-6Ih">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="fho-jB-6Ih">
                                     <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="fho-jB-6Ih" secondAttribute="height" multiplier="1:1" id="eXx-Wa-vt0"/>
@@ -50,7 +50,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u2R-Z3-Uec">
                             <rect key="frame" x="0.0" y="34" width="137" height="31"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-5f-Q4C">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-5f-Q4C">
                                     <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="qdX-5f-Q4C" secondAttribute="height" multiplier="1:1" id="QmC-Tc-q6w"/>
@@ -82,4 +82,7 @@
             <point key="canvasLocation" x="-69.599999999999994" y="-245.12743628185908"/>
         </view>
     </objects>
+    <resources>
+        <image name="Clock" width="21" height="21"/>
+    </resources>
 </document>

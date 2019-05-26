@@ -34,7 +34,18 @@ class SearchViewController: UIViewController {
     @IBAction func search() {
         searchRecipes()
     }
-    
+
+    func fixTableViewInsets() {
+        let zContentInsets = UIEdgeInsets.zero
+        tableView.contentInset = zContentInsets
+        tableView.scrollIndicatorInsets = zContentInsets
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        fixTableViewInsets()
+    }
+
     private func toggleActivityIndicator(shown: Bool) {
         activityIndicator.isHidden = shown
         searchButton.isHidden = !shown

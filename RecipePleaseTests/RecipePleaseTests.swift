@@ -10,10 +10,11 @@ import XCTest
 @testable import RecipePlease
 
 class RecipePleaseTests: XCTestCase {
-    var search: SearchServices = SearchServices()
-
+    var storage = Storage()
+    var search: SearchServices = SearchServices(storage: Storage())
+    
     override func setUp() {
-        search = SearchServices()
+        search = SearchServices(storage: storage)
     }
 
     func testGivenYummlyInstance_WhenGetAccess_ThenAccessAreCorrect() {
@@ -55,10 +56,18 @@ class RecipePleaseTests: XCTestCase {
     }
     
     func testGivenTabOfIngredients_WhenIngredientsToString_ThenHaveStringOfIngredients() {
-        let result = RecipeResult(ingredients: ["butter","gArlic","orange"], id: "12", recipeName: "Soup", totalTimeInSeconds: 123, smallImageUrls: [URL(fileURLWithPath: "")], imageUrlsBySize: ["re" : URL(fileURLWithPath: "")])
+        let result = RecipeResult(ingredients: ["butter","gArlic","orange"], id: "12", recipeName: "Soup", totalTimeInSeconds: 123, smallImageUrls: [URL(fileURLWithPath: "")], imageUrlsBySize: ["re" : URL(fileURLWithPath: "")], rating: 1)
         
         let ingredientsString = result.ingredientsToString()
         
         XCTAssertEqual(ingredientsString, "Butter, Garlic, Orange")
+    }
+    
+    func testGivenInt_WhenConvertStringSeconds_ThenConversionIsCorrectlyDone() {
+        let number: Int = 140
+        
+        let result = number.secondsToMinutesString()
+        
+        XCTAssertEqual(result, "2 min 20")
     }
 }

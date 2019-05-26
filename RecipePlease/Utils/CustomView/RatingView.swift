@@ -14,7 +14,7 @@ class RatingView: UIView {
     
     @IBOutlet weak var topImageView: UIImageView!
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
     override init(frame: CGRect) {

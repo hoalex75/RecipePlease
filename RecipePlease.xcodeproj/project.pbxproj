@@ -156,7 +156,6 @@
 				FA06B5C9226CE4330037B2CF /* Info.plist */,
 				FA06B5C4226CE4330037B2CF /* Assets.xcassets */,
 				FA06B5BD226CE4300037B2CF /* AppDelegate.swift */,
-				FA06B5E7226DB8F20037B2CF /* VariousExtensions.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -173,6 +172,7 @@
 		FACF2E89227A0B83004954D4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FA06B5E7226DB8F20037B2CF /* VariousExtensions.swift */,
 				FA20C38E229974C4002241E4 /* CustomView */,
 				FACF2E8A227A0B90004954D4 /* Cells */,
 			);
