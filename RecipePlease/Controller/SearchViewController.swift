@@ -124,7 +124,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
         let ingredientString = ingredients[indexPath.row]
         cell.textLabel?.text = "- " + ingredientString.capitalized
-        
+
         return cell
     }
     

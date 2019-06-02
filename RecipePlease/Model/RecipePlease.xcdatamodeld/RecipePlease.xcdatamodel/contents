@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="IngredientsCD" representedClassName=".IngredientsCD" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeCD" inverseName="toIngredients" inverseEntity="RecipeCD" syncable="YES"/>
+    </entity>
+    <entity name="RecipeCD" representedClassName=".RecipeCD" syncable="YES" codeGenerationType="category">
+        <attribute name="cookTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prepTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="toImages" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RecipeImagesCD" inverseName="newRelationship" inverseEntity="RecipeImagesCD" syncable="YES"/>
+        <relationship name="toIngredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="IngredientsCD" inverseName="newRelationship" inverseEntity="IngredientsCD" syncable="YES"/>
+        <relationship name="toSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RecipeSourceCD" inverseName="newRelationship" inverseEntity="RecipeSourceCD" syncable="YES"/>
+    </entity>
+    <entity name="RecipeImagesCD" representedClassName=".RecipeImagesCD" syncable="YES" codeGenerationType="category">
+        <attribute name="largeImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mediumImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="smallImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeCD" inverseName="toImages" inverseEntity="RecipeCD" syncable="YES"/>
+    </entity>
+    <entity name="RecipeSourceCD" representedClassName=".RecipeSourceCD" syncable="YES" codeGenerationType="category">
+        <attribute name="sourceDisplayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceRecipeUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceSiteUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeCD" inverseName="toSource" inverseEntity="RecipeCD" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="IngredientsCD" positionX="309.59765625" positionY="-41.12109375" width="128" height="75"/>
+        <element name="RecipeCD" positionX="124.62109375" positionY="-38.28125" width="128" height="180"/>
+        <element name="RecipeImagesCD" positionX="-82.96484375" positionY="-12.70703125" width="128" height="105"/>
+        <element name="RecipeSourceCD" positionX="86.91796875" positionY="182.60546875" width="128" height="105"/>
+    </elements>
+</model>

@@ -26,12 +26,19 @@ class RecipeViewController: UIViewController {
     }
 
     @IBAction func getDirections() {
+        addToFavorites()
         guard let url = recipe?.source.sourceRecipeUrl else { return } 
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    
+
+    private func addToFavorites() {
+        guard let recipe = recipe else { return }
+
+        let recipeCD = RecipeCD(context: AppDelegate.viewContext)
+        recipeCD.saveARecipe(recipe: recipe)
+    }
 }
 
 private extension RecipeViewController {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Result: Decodable {
     let criteria: Criteria
@@ -49,6 +50,7 @@ struct Attribution: Decodable {
 }
 
 struct Recipe: Decodable {
+    let id: String
     let name: String
     let images: [RecipeImages]
     let source: RecipeSource
@@ -57,6 +59,69 @@ struct Recipe: Decodable {
     let totalTime: String?
     let rating: Int?
     let ingredientLines: [String]
+}
+
+class RecipeCD: NSManagedObject {
+    static func all() -> [RecipeCD] {
+        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
+        guard let recipes = try? AppDelegate.viewContext.fetch(request) else { return [] }
+
+        return recipes
+    }
+
+    func saveARecipe(recipe: Recipe) {
+        let recipeImage = RecipeImagesCD(context: AppDelegate.viewContext)
+        recipeImage.smallImageURL = recipe.images[0].hostedSmallUrl?.absoluteString
+        recipeImage.mediumImageURL = recipe.images[0].hostedMediumUrl?.absoluteString
+        recipeImage.largeImageURL = recipe.images[0].hostedLargeUrl?.absoluteString
+
+        let recipeSource = RecipeSourceCD(context: AppDelegate.viewContext)
+        recipeSource.sourceDisplayName = recipe.source.sourceDisplayName
+        recipeSource.sourceRecipeUrl = recipe.source.sourceRecipeUrl?.absoluteString
+        recipeSource.sourceSiteUrl = recipe.source.sourceSiteUrl?.absoluteString
+
+        id = recipe.id
+        name = recipe.name
+        prepTime = recipe.prepTime
+        cookTime = recipe.cookTime
+        totalTime = recipe.totalTime
+        toImages = recipeImage
+        toSource = recipeSource
+
+        for ingredient in recipe.ingredientLines {
+            let ingredientCD = IngredientsCD(context: AppDelegate.viewContext)
+            ingredientCD.name = ingredient
+            ingredientCD.newRelationship = self
+        }
+
+        try? AppDelegate.viewContext.save()
+    }
+
+    func convertToRecipe() -> Recipe? {
+        if let id = id, let name = name {
+            RecipeImages(hostedSmallUrl: <#T##URL?#>, hostedMediumUrl: <#T##URL?#>, hostedLargeUrl: <#T##URL?#>, imageUrlsBySize: <#T##[String : URL]?#>)
+            var recipe = Recipe(id: id, name: name, images: <#T##[RecipeImages]#>, source: <#T##RecipeSource#>, prepTime: <#T##String?#>, cookTime: <#T##String?#>, totalTime: <#T##String?#>, rating: <#T##Int?#>, ingredientLines: <#T##[String]#>)
+        }
+
+
+        return nil
+    }
+}
+
+class IngredientsCD: NSManagedObject {
+    
+}
+
+class RecipeImagesCD: NSManagedObject {
+    func convertToRecipeImages() -> RecipeImages {
+        let images = RecipeImages(hostedSmallUrl: URL(string: smallImageURL ?? ""), hostedMediumUrl: URL(string: mediumImageURL ?? ""), hostedLargeUrl: URL(string: largeImageURL ?? ""), imageUrlsBySize: nil)
+
+        return images
+    }
+}
+
+class RecipeSourceCD: NSManagedObject {
+
 }
 
 struct RecipeImages: Decodable {
