@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipeViewController: UIViewController {
+class RecipeViewController: UIViewController, DisplayAlertsInterface {
    
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var tableView: UITableView!
@@ -17,33 +17,50 @@ class RecipeViewController: UIViewController {
     
     var search: SearchServices?
     var recipe: Recipe?
-    
-    
+    var isInFavorite: Bool? {
+        guard let recipe = recipe else { return nil }
+        return RecipeCD.isPresentInDataBase(recipe: recipe)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
     }
 
     @IBAction func getDirections() {
-        addToFavorites()
         guard let url = recipe?.source.sourceRecipeUrl else { return } 
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 
-    private func addToFavorites() {
-        guard let recipe = recipe else { return }
-
+    private func addToFavorites(recipe: Recipe) {
         let recipeCD = RecipeCD(context: AppDelegate.viewContext)
         recipeCD.saveARecipe(recipe: recipe)
+    }
+
+    private func deleteFromFavorites(recipe: Recipe) {
+        RecipeCD.deleteRecipe(recipe: recipe) {
+            createAndDisplayErrorMessage(message: "An error occured during the delete of your favorite recipe.")
+        }
+    }
+
+    @objc private func favTapped() {
+        guard let isInFavorite = isInFavorite, let recipe = recipe else { return }
+        if isInFavorite {
+            createAndDispalyInfoPopin(message: "You are about to delete this recipe from your favorite ones. Do you really want it ?", action: { [weak self] in
+                self?.deleteFromFavorites(recipe: recipe)
+            })
+        } else {
+            addToFavorites(recipe: recipe)
+        }
     }
 }
 
 private extension RecipeViewController {
     func setupView() {
         guard let recipe = recipe else { return }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(favTapped))
         setImage(with: recipe)
         setTitle(with: recipe)
         setRatings(with: recipe)
@@ -51,7 +68,7 @@ private extension RecipeViewController {
     
     func setImage(with recipe: Recipe) {
         guard let search = search, let url = urlImage(with: recipe) else {
-            //TODO
+            //TODO Image par défaut
             return
         }
         search.getImage(imageURL: url) { [weak self] success, data in
@@ -60,7 +77,7 @@ private extension RecipeViewController {
                     self?.recipeImageVIew.image = UIImage(data: data)
                 }
             } else {
-                //TODO
+                self?.createAndDisplayErrorMessage(message: "An error occured during the loading of the image.")
                 self?.recipeImageVIew.image = UIImage(named: "Clock")
             }
         }

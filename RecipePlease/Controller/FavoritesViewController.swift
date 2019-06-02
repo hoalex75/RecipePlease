@@ -8,8 +8,10 @@
 
 import UIKit
 
-final class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController, DisplayAlertsInterface {
     var recipes: [RecipeCD] = RecipeCD.all()
+    var recipeCD: RecipeCD?
+    var search = SearchServices(storage: Storage())
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,6 +35,11 @@ final class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        recipeCD = recipes[indexPath.row]
+        self.showRecipe()
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipes.count
     }
@@ -55,21 +62,38 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
 
         var ingredientsLabel = ""
 
-        for element in recipe.toIngredients! {
-            if let ingredient = element as? IngredientsCD,let name = ingredient.name {
-                ingredientsLabel += name
-                ingredientsLabel += ", "
+        if let toIngredients = recipe.toIngredients {
+            for element in toIngredients {
+                if let ingredient = element as? IngredientsCD,let name = ingredient.name {
+                    ingredientsLabel += name
+                    ingredientsLabel += ", "
+                }
             }
         }
 
         cell.ingredientsLabel.text = ingredientsLabel
-
         cell.ratingView.ratingLabel.text = String(recipe.rating)
         cell.ratingView.totalTimeLabel.text = recipe.totalTime
-        cell.search = SearchServices(storage: Storage())
+        cell.search = search
+
         if let image = recipe.toImages?.smallImageURL {
             cell.imageUrl = URL(string: image)
         }
+    }
+}
 
+extension FavoritesViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == "segueCDtoRecipe",
+            let segueVC = segue.destination as? RecipeViewController,
+            let recipeCD = recipeCD,
+            let recipe = recipeCD.convertToRecipe() {
+            segueVC.search = search
+            segueVC.recipe = recipe
+        }
+    }
+
+    func showRecipe() {
+        performSegue(withIdentifier: "segueCDtoRecipe", sender: nil)
     }
 }

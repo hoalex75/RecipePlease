@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, DisplayAlertsInterface {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -75,11 +75,9 @@ class SearchViewController: UIViewController {
         toggleActivityIndicator(shown: false)
         search.getResultsWithIngredients(ingredients: ingredients) { [weak self] (success, _) in
             if success {
-                print("ok")
                 self?.showResults()
             } else {
-                //TODO: ALERT
-                print("nonOk")
+                self?.createAndDisplayErrorMessage(message: "An error occured during the loadings of your search's results.")
             }
             self?.toggleActivityIndicator(shown: true)
         }

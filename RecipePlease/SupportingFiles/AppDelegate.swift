@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        deleteAllData("RecipeCD")
-        deleteAllData("IngredientsCD")
-        deleteAllData("RecipeImagesCD")
-        deleteAllData("RecipeSourceCD")
+//        deleteAllData("RecipeCD")
+//        deleteAllData("IngredientsCD")
+//        deleteAllData("RecipeImagesCD")
+//        deleteAllData("RecipeSourceCD")
         return true
     }
 

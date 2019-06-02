@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultsViewController: UIViewController {
+class ResultsViewController: UIViewController, DisplayAlertsInterface {
     var search: SearchServices?
     var storage: Storage?
     @IBOutlet weak var tableView: UITableView!
@@ -52,12 +52,11 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let result = storage?.result else { return }
-        search?.getRecipe(recipeId: result.matches[indexPath.row].id, completionHandler: { success in
+        search?.getRecipe(recipeId: result.matches[indexPath.row].id, completionHandler: { [weak self] success in
             if success {
-                self.showRecipe()
+                self?.showRecipe()
             } else {
-                // TODO
-                print("isNogood")
+                self?.createAndDisplayErrorMessage(message: "An error occured during the loading of the recipe's details.")
             }
         })
     }

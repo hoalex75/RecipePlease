@@ -69,6 +69,40 @@ class RecipeCD: NSManagedObject {
         return recipes
     }
 
+    static func isPresentInDataBase(recipe: Recipe) -> Bool{
+        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", recipe.id)
+        guard let recipe = try? AppDelegate.viewContext.fetch(request) else { return false }
+
+        if recipe == [] {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    static func deleteRecipe(recipe: Recipe, onError: (() -> Void)) {
+        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", recipe.id)
+
+        do {
+            let recipes = try AppDelegate.viewContext.fetch(request)
+            guard recipes.count > 0 else { return }
+            let recipeToDelete = recipes[0]
+            AppDelegate.viewContext.delete(recipeToDelete)
+
+            do {
+                try AppDelegate.viewContext.save()
+                print("delete done")
+            } catch {
+                onError()
+            }
+
+        } catch {
+            onError()
+        }
+    }
+
     func saveARecipe(recipe: Recipe) {
         let recipeImage = RecipeImagesCD(context: AppDelegate.viewContext)
         recipeImage.smallImageURL = recipe.images[0].hostedSmallUrl?.absoluteString
@@ -87,6 +121,9 @@ class RecipeCD: NSManagedObject {
         totalTime = recipe.totalTime
         toImages = recipeImage
         toSource = recipeSource
+        if let ratingRecipe = recipe.rating {
+            rating = Int16(ratingRecipe)
+        }
 
         for ingredient in recipe.ingredientLines {
             let ingredientCD = IngredientsCD(context: AppDelegate.viewContext)
@@ -98,18 +135,33 @@ class RecipeCD: NSManagedObject {
     }
 
     func convertToRecipe() -> Recipe? {
-        if let id = id, let name = name {
-            RecipeImages(hostedSmallUrl: <#T##URL?#>, hostedMediumUrl: <#T##URL?#>, hostedLargeUrl: <#T##URL?#>, imageUrlsBySize: <#T##[String : URL]?#>)
-            var recipe = Recipe(id: id, name: name, images: <#T##[RecipeImages]#>, source: <#T##RecipeSource#>, prepTime: <#T##String?#>, cookTime: <#T##String?#>, totalTime: <#T##String?#>, rating: <#T##Int?#>, ingredientLines: <#T##[String]#>)
+        if let id = id, let name = name, let toImages = toImages, let toSource = toSource {
+            let images = toImages.convertToRecipeImages()
+            let source = toSource.convertToRecipeSource()
+
+            let recipe = Recipe(id: id, name: name, images: [images], source: source, prepTime: prepTime, cookTime: cookTime, totalTime: totalTime, rating: Int(rating), ingredientLines: ingredientsLines())
+
+            return recipe
         }
 
 
         return nil
     }
+
+    private func ingredientsLines() -> [String] {
+        var tab: [String] = []
+        guard let toIngredients = toIngredients else { return [] }
+        for element in toIngredients {
+            if let ingredient = element as? IngredientsCD, let name = ingredient.name {
+                tab.append(name)
+            }
+        }
+
+        return tab
+    }
 }
 
 class IngredientsCD: NSManagedObject {
-    
 }
 
 class RecipeImagesCD: NSManagedObject {
@@ -121,7 +173,11 @@ class RecipeImagesCD: NSManagedObject {
 }
 
 class RecipeSourceCD: NSManagedObject {
+    func convertToRecipeSource() -> RecipeSource {
+        let source = RecipeSource(sourceDisplayName: sourceDisplayName ?? "", sourceSiteUrl: URL(string: sourceSiteUrl ?? ""), sourceRecipeUrl: URL(string: sourceRecipeUrl ?? ""))
 
+        return source
+    }
 }
 
 struct RecipeImages: Decodable {
