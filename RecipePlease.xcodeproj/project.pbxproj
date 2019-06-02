@@ -26,6 +26,7 @@
 		FA529C1122A3FECF008C2447 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1022A3FECF008C2447 /* FavoritesViewController.swift */; };
 		FA529C1422A400F1008C2447 /* RecipePlease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1222A400F1008C2447 /* RecipePlease.xcdatamodeld */; };
 		FA529C1622A43CDF008C2447 /* DisplayAlertsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1522A43CDF008C2447 /* DisplayAlertsInterface.swift */; };
+		FA529C1822A44705008C2447 /* CoreDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1722A44705008C2447 /* CoreDataModels.swift */; };
 		FAE2F88B2279B211001399D8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88A2279B211001399D8 /* Storage.swift */; };
 		FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88C2279D40D001399D8 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		FA529C1022A3FECF008C2447 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		FA529C1322A400F1008C2447 /* RecipePlease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipePlease.xcdatamodel; sourceTree = "<group>"; };
 		FA529C1522A43CDF008C2447 /* DisplayAlertsInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlertsInterface.swift; sourceTree = "<group>"; };
+		FA529C1722A44705008C2447 /* CoreDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModels.swift; sourceTree = "<group>"; };
 		FAE2F88A2279B211001399D8 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		FAE2F88C2279D40D001399D8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				FA06B5D3226CE75A0037B2CF /* YummlyIdentifiers.swift */,
 				FAE2F88A2279B211001399D8 /* Storage.swift */,
 				FA4714CA22998F0B00B61F6B /* YummlyResponseModels.swift */,
+				FA529C1722A44705008C2447 /* CoreDataModels.swift */,
 				FA529C1222A400F1008C2447 /* RecipePlease.xcdatamodeld */,
 			);
 			path = Model;
@@ -311,6 +314,7 @@
 			files = (
 				FA06B5C0226CE4300037B2CF /* ResultsViewController.swift in Sources */,
 				FAE2F88B2279B211001399D8 /* Storage.swift in Sources */,
+				FA529C1822A44705008C2447 /* CoreDataModels.swift in Sources */,
 				FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */,
 				FA20C396229978B1002241E4 /* RatingView.swift in Sources */,
 				FA06B5D4226CE75A0037B2CF /* YummlyIdentifiers.swift in Sources */,
