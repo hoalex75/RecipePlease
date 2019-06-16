@@ -16,6 +16,7 @@
         <relationship name="toSource" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="RecipeSourceCD" inverseName="newRelationship" inverseEntity="RecipeSourceCD" syncable="YES"/>
     </entity>
     <entity name="RecipeImagesCD" representedClassName=".RecipeImagesCD" syncable="YES" codeGenerationType="category">
+        <attribute name="imageIcon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="largeImageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mediumImageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="smallImageURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +31,7 @@
     <elements>
         <element name="IngredientsCD" positionX="309.59765625" positionY="-41.12109375" width="128" height="75"/>
         <element name="RecipeCD" positionX="124.62109375" positionY="-38.28125" width="128" height="180"/>
-        <element name="RecipeImagesCD" positionX="-82.96484375" positionY="-12.70703125" width="128" height="105"/>
+        <element name="RecipeImagesCD" positionX="-82.96484375" positionY="-12.70703125" width="128" height="120"/>
         <element name="RecipeSourceCD" positionX="86.91796875" positionY="182.60546875" width="128" height="105"/>
     </elements>
 </model>

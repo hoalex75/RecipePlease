@@ -80,7 +80,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.ratingView.totalTimeLabel.text = result.totalTimeInSeconds.secondsToMinutesString()
         cell.search = search
-        cell.imageUrl = result.imageUrlsBySize["90"]
+        cell.imageUrl = result.imageUrlsBySize["90"]?.absoluteString
     }
 }
 

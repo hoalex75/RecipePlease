@@ -26,16 +26,19 @@ class ResultCell: UITableViewCell {
         bindView()
     }
     
-    var imageUrl: URL? {
+    var imageUrl: String? {
         didSet {
             if let imageUrl = imageUrl {
-                imageViewSetup(url: imageUrl)
+                imageViewSetup(url: URL(string: imageUrl))
             }
         }
     }
     
-    private func imageViewSetup(url: URL) {
-        guard let search = search else { return }
+    private func imageViewSetup(url: URL?) {
+        guard let search = search, let url = url else {
+            activityIndicator.isHidden = true
+            return
+        }
         search.getImage(imageURL: url) { [weak self] (success, data) in
             if success, let data = data {
                 self?.setImage(data: data)
@@ -48,6 +51,7 @@ class ResultCell: UITableViewCell {
     
     private func setImage(data: Data) {
         recipeImageView.image = UIImage(data: data)
+        recipeImageView.contentMode = .scaleAspectFill
         activityIndicator.isHidden = true
         recipeImageView.isHidden = false
     }

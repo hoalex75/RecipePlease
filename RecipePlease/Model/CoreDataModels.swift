@@ -56,6 +56,9 @@ class RecipeCD: NSManagedObject {
         recipeImage.smallImageURL = recipe.images[0].hostedSmallUrl?.absoluteString
         recipeImage.mediumImageURL = recipe.images[0].hostedMediumUrl?.absoluteString
         recipeImage.largeImageURL = recipe.images[0].hostedLargeUrl?.absoluteString
+        if let iconImage = recipe.images[0].imageUrlsBySize {
+            recipeImage.imageIcon = iconImage["90"]?.absoluteString
+        }
 
         let recipeSource = RecipeSourceCD(context: AppDelegate.viewContext)
         recipeSource.sourceDisplayName = recipe.source.sourceDisplayName

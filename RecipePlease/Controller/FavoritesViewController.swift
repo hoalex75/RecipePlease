@@ -41,7 +41,6 @@ final class FavoritesViewController: UIViewController, DisplayAlertsInterface {
         super.viewDidLoad()
         bindView()
         registerTableViewCells()
-        // Do any additional setup after loading the view.
     }
 
     private func registerTableViewCells() {
@@ -93,9 +92,8 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.ratingView.totalTimeLabel.text = recipe.totalTime
         cell.search = search
 
-        if let image = recipe.toImages?.smallImageURL {
-            cell.imageUrl = URL(string: image)
-        }
+        let urlImage = recipe.toImages?.imageIcon
+        cell.imageUrl = urlImage
     }
 }
 
