@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import RxSwift
 
 final class FavoritesViewController: UIViewController, DisplayAlertsInterface {
     var recipes: [RecipeCD] = RecipeCD.all()
     var recipeCD: RecipeCD?
     var search = SearchServices(storage: Storage())
+    let disposeBag = DisposeBag()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,6 +25,7 @@ final class FavoritesViewController: UIViewController, DisplayAlertsInterface {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindView()
         registerTableViewCells()
         // Do any additional setup after loading the view.
     }
@@ -95,5 +98,11 @@ extension FavoritesViewController {
 
     func showRecipe() {
         performSegue(withIdentifier: "segueCDtoRecipe", sender: nil)
+    }
+}
+
+extension FavoritesViewController: ViewBinder {
+    func bindView() {
+        bindBackgrounds(tableView: tableView)
     }
 }

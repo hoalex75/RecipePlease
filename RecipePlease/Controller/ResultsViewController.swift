@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import RxSwift
 
 class ResultsViewController: UIViewController, DisplayAlertsInterface {
     var search: SearchServices?
     var storage: Storage?
+    let disposeBag = DisposeBag()
+
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindView()
         registerTableViewCells()
     }
     
@@ -88,5 +92,9 @@ extension ResultsViewController {
     }
 }
 
-
+extension ResultsViewController: ViewBinder {
+    func bindView() {
+        bindBackgrounds(tableView: tableView)
+    }
+}
 

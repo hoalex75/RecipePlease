@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ResultCell: UITableViewCell {
     @IBOutlet weak var backIngredientsView: UIView!
@@ -16,7 +17,14 @@ class ResultCell: UITableViewCell {
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let disposeBag = DisposeBag()
+
     var search: SearchServices?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        bindView()
+    }
     
     var imageUrl: URL? {
         didSet {
@@ -42,5 +50,13 @@ class ResultCell: UITableViewCell {
         recipeImageView.image = UIImage(data: data)
         activityIndicator.isHidden = true
         recipeImageView.isHidden = false
+    }
+}
+
+
+extension ResultCell: ViewBinder {
+    func bindView() {
+        bindBackgrounds(backgroundView: backIngredientsView)
+        bindTextColors(labels: [ingredientsLabel, recipeNameLabel])
     }
 }

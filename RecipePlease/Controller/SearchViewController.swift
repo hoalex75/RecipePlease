@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class SearchViewController: UIViewController, DisplayAlertsInterface {
+    
+    @IBOutlet weak var fridgeLabel: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var billboardView: UIView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -16,11 +22,19 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
     
     private var storage = Storage()
     private var searchService: SearchServices?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         storage.ingredients = []
         searchService = SearchServices(storage: storage)
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bindTabBar()
     }
 
     @IBAction func add() {
@@ -35,7 +49,13 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
         searchRecipes()
     }
 
-    func fixTableViewInsets() {
+    private func setupView() {
+        billboardView.layer.cornerRadius = 8.0
+        searchField.layer.cornerRadius = 4.0
+        bindView()
+    }
+
+    private func fixTableViewInsets() {
         let zContentInsets = UIEdgeInsets.zero
         tableView.contentInset = zContentInsets
         tableView.scrollIndicatorInsets = zContentInsets
@@ -144,5 +164,12 @@ extension SearchViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
+    }
+}
+
+extension SearchViewController: ViewBinder {
+    func bindView() {
+        bindBackgrounds(backgroundView: contentView)
+        bindTextColors(labels: [ingredientsLabel, fridgeLabel])
     }
 }

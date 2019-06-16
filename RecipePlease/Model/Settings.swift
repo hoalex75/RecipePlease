@@ -11,9 +11,10 @@ import RxCocoa
 
 class Settings {
     static var shared: Settings = Settings()
-    private let isInDarkMode = BehaviorRelay<Bool>(value: false)
+    let isInDarkMode = BehaviorRelay<Bool>(value: false)
     private let disposeBag = DisposeBag()
     let backgroundColor = BehaviorRelay<UIColor>(value: UIColor.white)
+    let textColor = BehaviorRelay<UIColor>(value: UIColor.black)
 
     private init() {
         bindColors()
@@ -30,9 +31,15 @@ class Settings {
 
     func bindColors() {
         isInDarkMode.map { isOn -> UIColor in
-            let color = isOn ? UIColor.black : UIColor.green
+            let color = isOn ? UIColor.black : UIColor.normalModeBackground
 
             return color
         }.bind(to: backgroundColor).disposed(by: disposeBag)
+
+        isInDarkMode.map { isOn -> UIColor in
+            let color = isOn ? UIColor.white : UIColor.black
+
+            return color
+        }.bind(to: textColor).disposed(by: disposeBag)
     }
 }

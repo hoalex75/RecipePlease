@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class RecipeViewController: UIViewController, DisplayAlertsInterface {
    
+    @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var billboardView: UIView!
+    @IBOutlet weak var redirectionButton: UIButton!
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var recipeImageVIew: UIImageView!
@@ -17,6 +22,8 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
     
     var search: SearchServices?
     var recipe: Recipe?
+    let disposeBag = DisposeBag()
+
     var isInFavorite: Bool? {
         guard let recipe = recipe else { return nil }
         return RecipeCD.isPresentInDataBase(recipe: recipe)
@@ -59,8 +66,19 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
 
 private extension RecipeViewController {
     func setupView() {
+        billboardView.layer.cornerRadius = 5.0
+        bindView()
         guard let recipe = recipe else { return }
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(favTapped))
+        Settings.shared.isInDarkMode.map { isOn -> String in
+            if isOn {
+                return "OK"
+            } else {
+                return "KO"
+            }
+            }.subscribe(onNext: { [weak self] value in
+                self?.navigationItem.rightBarButtonItem?.title = value
+            }).disposed(by: disposeBag)
         setImage(with: recipe)
         setTitle(with: recipe)
         setRatings(with: recipe)
@@ -150,5 +168,12 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = String(format: "- %@", ingredientString.capitalized)
         
         return cell
+    }
+}
+
+extension RecipeViewController: ViewBinder {
+    func bindView() {
+        bindBackgrounds(backgroundView: contentView)
+        bindTextColors(labels: [ingredientsLabel, recipeNameLabel])
     }
 }

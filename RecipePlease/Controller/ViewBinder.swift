@@ -11,14 +11,19 @@ import RxCocoa
 import UIKit
 
 protocol ViewBinder {
-    func bindBackgrounds(backgroundView: UIView, tableView: UITableView?, textView: UITextView?, disposeBag: DisposeBag)
+    var disposeBag: DisposeBag { get }
+
+    func bindBackgrounds(backgroundView: UIView?, tableView: UITableView?, textView: UITextView?)
+    func bindTextColors(labels: [UILabel], textView: UITextView?)
 }
 
 extension ViewBinder {
-    func bindBackgrounds(backgroundView: UIView, tableView: UITableView? = nil, textView: UITextView? = nil, disposeBag: DisposeBag) {
+    func bindBackgrounds(backgroundView: UIView? = nil, tableView: UITableView? = nil, textView: UITextView? = nil) {
         let backgroundColor = Settings.shared.backgroundColor
 
-        backgroundColor.asDriver().drive(backgroundView.rx.backgroundColor).disposed(by: disposeBag)
+        if let backgroundView = backgroundView {
+            backgroundColor.asDriver().drive(backgroundView.rx.backgroundColor).disposed(by: disposeBag)
+        }
 
         if let tableView = tableView {
             backgroundColor.asDriver().drive(tableView.rx.backgroundColor).disposed(by: disposeBag)
@@ -27,5 +32,29 @@ extension ViewBinder {
         if let textView = textView {
             backgroundColor.asDriver().drive(textView.rx.backgroundColor).disposed(by: disposeBag)
         }
+    }
+
+    func bindTextColors(labels: [UILabel], textView: UITextView? = nil) {
+        let textColor = Settings.shared.textColor
+
+        labels.forEach { label in
+            textColor.asDriver().drive(label.rx.textColor).disposed(by: disposeBag)
+        }
+
+        if let textView = textView {
+            textColor.asDriver().drive(textView.rx.textColor).disposed(by: disposeBag)
+        }
+    }
+}
+
+extension ViewBinder where Self: UIViewController {
+    func bindTabBar() {
+        let backgroundColor = Settings.shared.backgroundColor
+        let textColor = Settings.shared.textColor
+        guard let tabBar = self.tabBarController?.tabBar else { return }
+
+
+        backgroundColor.asDriver().drive(tabBar.rx.barTintColor).disposed(by: disposeBag)
+        textColor.asDriver().drive(tabBar.rx.tintColor).disposed(by: disposeBag)
     }
 }

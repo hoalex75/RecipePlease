@@ -29,6 +29,8 @@
 		FA529C1622A43CDF008C2447 /* DisplayAlertsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1522A43CDF008C2447 /* DisplayAlertsInterface.swift */; };
 		FA529C1822A44705008C2447 /* CoreDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA529C1722A44705008C2447 /* CoreDataModels.swift */; };
 		FA8E7F9A22B65D80002CBE84 /* ViewBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E7F9922B65D80002CBE84 /* ViewBinder.swift */; };
+		FA8E7F9C22B66109002CBE84 /* Rx+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E7F9B22B66109002CBE84 /* Rx+Helpers.swift */; };
+		FA8E7F9E22B67875002CBE84 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E7F9D22B67875002CBE84 /* UIColor+Helpers.swift */; };
 		FAE2F88B2279B211001399D8 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88A2279B211001399D8 /* Storage.swift */; };
 		FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE2F88C2279D40D001399D8 /* SearchViewController.swift */; };
 		FAFD5E0222B65063005699AB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFD5E0122B65063005699AB /* SettingsViewController.swift */; };
@@ -74,6 +76,8 @@
 		FA529C1522A43CDF008C2447 /* DisplayAlertsInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlertsInterface.swift; sourceTree = "<group>"; };
 		FA529C1722A44705008C2447 /* CoreDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModels.swift; sourceTree = "<group>"; };
 		FA8E7F9922B65D80002CBE84 /* ViewBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBinder.swift; sourceTree = "<group>"; };
+		FA8E7F9B22B66109002CBE84 /* Rx+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Helpers.swift"; sourceTree = "<group>"; };
+		FA8E7F9D22B67875002CBE84 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
 		FAE2F88A2279B211001399D8 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		FAE2F88C2279D40D001399D8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		FAFD5E0122B65063005699AB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				FA06B5E7226DB8F20037B2CF /* VariousExtensions.swift */,
+				FA8E7F9B22B66109002CBE84 /* Rx+Helpers.swift */,
+				FA8E7F9D22B67875002CBE84 /* UIColor+Helpers.swift */,
 				FA20C38E229974C4002241E4 /* CustomView */,
 				FACF2E8A227A0B90004954D4 /* Cells */,
 			);
@@ -397,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA06B5C0226CE4300037B2CF /* ResultsViewController.swift in Sources */,
+				FA8E7F9E22B67875002CBE84 /* UIColor+Helpers.swift in Sources */,
 				FAE2F88B2279B211001399D8 /* Storage.swift in Sources */,
 				FA529C1822A44705008C2447 /* CoreDataModels.swift in Sources */,
 				FAE2F88D2279D40D001399D8 /* SearchViewController.swift in Sources */,
@@ -406,6 +413,7 @@
 				FAFD5E0222B65063005699AB /* SettingsViewController.swift in Sources */,
 				FA4714CB22998F0B00B61F6B /* YummlyResponseModels.swift in Sources */,
 				FA529C1422A400F1008C2447 /* RecipePlease.xcdatamodeld in Sources */,
+				FA8E7F9C22B66109002CBE84 /* Rx+Helpers.swift in Sources */,
 				FA06B5EC2279B04E0037B2CF /* ResultCell.swift in Sources */,
 				FAFD5E0422B652E3005699AB /* Settings.swift in Sources */,
 				FA8E7F9A22B65D80002CBE84 /* ViewBinder.swift in Sources */,

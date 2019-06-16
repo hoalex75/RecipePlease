@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
 
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         bindView()
@@ -28,12 +28,13 @@ class SettingsViewController: UIViewController {
         Settings.shared.changeDisplayMode()
     }
 
-
+    
 }
 
 
 extension SettingsViewController: ViewBinder {
     private func bindView() {
-        self.bindBackgrounds(backgroundView: contentView, textView: textView, disposeBag: disposeBag)
+        bindBackgrounds(backgroundView: contentView, textView: textView)
+        bindTextColors(labels: [titleLabel], textView: textView)
     }
 }
