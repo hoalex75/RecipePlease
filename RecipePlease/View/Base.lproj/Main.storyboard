@@ -149,7 +149,7 @@
                                                                     <rect key="frame" x="15" y="0.0" width="241" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="19"/>
+                                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="23"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>

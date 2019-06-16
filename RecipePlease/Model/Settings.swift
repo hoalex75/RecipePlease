@@ -45,9 +45,9 @@ class Settings {
 
     func getText(_ isOn: Bool) -> String {
         if isOn {
-            return "You can deactivate the dark mode when that seems you the right moment !"
+            return "You can deactivate the dark mode when it seems the right moment to you !"
         } else {
-            return "You can activate the dark mode at any time in order to rest your eyes from this aggressive light !"
+            return "You can activate the dark mode at any time in order to rest your eyes from this such aggressive light !"
         }
     }
 }

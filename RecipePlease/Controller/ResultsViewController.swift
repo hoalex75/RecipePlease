@@ -24,6 +24,8 @@ class ResultsViewController: UIViewController, DisplayAlertsInterface {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.title = "Results"
+        bindNavigationItemColor()
         bindStatusBar()
     }
     

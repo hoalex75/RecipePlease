@@ -73,6 +73,7 @@ extension ViewBinder where Self: UIViewController {
         let textColor = Settings.shared.textColor
         guard let navBar = self.navigationController?.navigationBar else { return }
 
+        navBar.isTranslucent = false
         backgroundColor.asDriver().drive(navBar.rx.barTintColor).disposed(by: disposeBag)
         textColor.asDriver().drive(navBar.rx.tintColor).disposed(by: disposeBag)
     }

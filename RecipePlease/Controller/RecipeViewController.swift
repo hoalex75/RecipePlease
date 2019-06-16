@@ -34,6 +34,12 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
         setupView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = "Recipe"
+        bindNavigationItemColor()
+    }
+
     @IBAction func getDirections() {
         guard let url = recipe?.source.sourceRecipeUrl else { return } 
         if UIApplication.shared.canOpenURL(url) {
