@@ -19,6 +19,20 @@ final class FavoritesViewController: UIViewController, DisplayAlertsInterface {
         super.viewWillAppear(animated)
         recipes = RecipeCD.all()
         tableView.reloadData()
+        self.navigationItem.title = "Favorites"
+        bindNavigationItemColor()
+        bindNavBar()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        fixTableViewInsets()
+    }
+    
+    private func fixTableViewInsets() {
+        let zContentInsets = UIEdgeInsets.zero
+        tableView.contentInset = zContentInsets
+        tableView.scrollIndicatorInsets = zContentInsets
     }
 
     @IBOutlet weak var tableView: UITableView!

@@ -50,7 +50,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u2R-Z3-Uec">
                             <rect key="frame" x="0.0" y="34" width="137" height="31"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-5f-Q4C">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-5f-Q4C">
                                     <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="qdX-5f-Q4C" secondAttribute="height" multiplier="1:1" id="QmC-Tc-q6w"/>
@@ -84,5 +84,6 @@
     </objects>
     <resources>
         <image name="Clock" width="21" height="21"/>
+        <image name="Star" width="36" height="33"/>
     </resources>
 </document>

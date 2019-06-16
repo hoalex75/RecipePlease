@@ -11,6 +11,8 @@ import RxSwift
 
 class SearchViewController: UIViewController, DisplayAlertsInterface {
     
+    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var fridgeLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var billboardView: UIView!
@@ -29,12 +31,19 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
         setupView()
         storage.ingredients = []
         searchService = SearchServices(storage: storage)
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bindTabBar()
+        bindNavBar()
+        bindStatusBar()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     @IBAction func add() {
@@ -50,6 +59,9 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
     }
 
     private func setupView() {
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
+        searchField.leftView = paddingView
+        searchField.leftViewMode = .always
         billboardView.layer.cornerRadius = 8.0
         searchField.layer.cornerRadius = 4.0
         bindView()
@@ -171,5 +183,6 @@ extension SearchViewController: ViewBinder {
     func bindView() {
         bindBackgrounds(backgroundView: contentView)
         bindTextColors(labels: [ingredientsLabel, fridgeLabel])
+        bindButtonsColors(buttons: [searchButton, addButton, clearButton])
     }
 }

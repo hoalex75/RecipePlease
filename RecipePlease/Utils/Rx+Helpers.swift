@@ -40,3 +40,25 @@ extension Reactive where Base: UITabBar {
         }
     }
 }
+
+extension Reactive where Base: UINavigationBar {
+    public var barTintColor : Binder<UIColor> {
+        return Binder(self.base) { navBar, barTintColor in
+            navBar.barTintColor = barTintColor
+        }
+    }
+
+    public var tintColor : Binder<UIColor> {
+        return Binder(self.base) { navBar, tintColor in
+            navBar.tintColor = tintColor
+        }
+    }
+}
+
+extension Reactive where Base: UIButton {
+    public var titleColor : Binder<UIColor> {
+        return Binder(self.base) { button, titleColor in
+            button.setTitleColor(titleColor, for: [])
+        }
+    }
+}

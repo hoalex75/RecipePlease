@@ -21,6 +21,11 @@ class ResultsViewController: UIViewController, DisplayAlertsInterface {
         bindView()
         registerTableViewCells()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bindStatusBar()
+    }
     
     
     private func registerTableViewCells() {

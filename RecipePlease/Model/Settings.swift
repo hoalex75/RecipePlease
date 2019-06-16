@@ -31,15 +31,23 @@ class Settings {
 
     func bindColors() {
         isInDarkMode.map { isOn -> UIColor in
-            let color = isOn ? UIColor.black : UIColor.normalModeBackground
+            let color = isOn ? UIColor.darkModeBackground : UIColor.normalModeBackground
 
             return color
         }.bind(to: backgroundColor).disposed(by: disposeBag)
 
         isInDarkMode.map { isOn -> UIColor in
-            let color = isOn ? UIColor.white : UIColor.black
+            let color = isOn ? UIColor.normalModeBackground : UIColor.darkModeBackground
 
             return color
         }.bind(to: textColor).disposed(by: disposeBag)
+    }
+
+    func getText(_ isOn: Bool) -> String {
+        if isOn {
+            return "You can deactivate the dark mode when that seems you the right moment !"
+        } else {
+            return "You can activate the dark mode at any time in order to rest your eyes from this aggressive light !"
+        }
     }
 }

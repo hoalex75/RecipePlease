@@ -175,5 +175,6 @@ extension RecipeViewController: ViewBinder {
     func bindView() {
         bindBackgrounds(backgroundView: contentView)
         bindTextColors(labels: [ingredientsLabel, recipeNameLabel])
+        bindButtonsColors(buttons: [redirectionButton])
     }
 }

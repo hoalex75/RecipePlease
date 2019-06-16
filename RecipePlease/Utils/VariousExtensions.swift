@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     func hasGotWhitespaces() -> Bool {
@@ -30,6 +31,16 @@ extension Int {
         }
         else {
             return String(format: "%d min %d", minutes, seconds)
+        }
+    }
+}
+
+extension UIApplication {
+    class var statusBarBackgroundColor: UIColor? {
+        get {
+            return (shared.value(forKey: "statusBar") as? UIView)?.backgroundColor
+        } set {
+            (shared.value(forKey: "statusBar") as? UIView)?.backgroundColor = newValue
         }
     }
 }
