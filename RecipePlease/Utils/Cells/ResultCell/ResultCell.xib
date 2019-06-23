@@ -35,10 +35,10 @@
                                 <rect key="frame" x="4" y="4" width="267" height="85"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teb-R8-UXV" customClass="RatingView" customModule="RecipePlease">
-                                        <rect key="frame" x="187" y="0.0" width="80" height="40"/>
+                                        <rect key="frame" x="177" y="0.0" width="90" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="teb-R8-UXV" secondAttribute="height" multiplier="32:16" id="6M6-2m-VS8"/>
+                                            <constraint firstAttribute="width" secondItem="teb-R8-UXV" secondAttribute="height" multiplier="36:16" id="6M6-2m-VS8"/>
                                             <constraint firstAttribute="height" constant="40" id="rFb-0D-FWb"/>
                                         </constraints>
                                     </view>

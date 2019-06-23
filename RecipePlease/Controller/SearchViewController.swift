@@ -121,6 +121,7 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
         if text.count > 0 {
             storage.ingredients?.append(text)
             reloadTableView()
+            searchField.text = ""
         }
     }
     
@@ -173,6 +174,7 @@ extension SearchViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addIngredientToList()
         textField.resignFirstResponder()
         
         return true

@@ -43,7 +43,6 @@ class ResultCell: UITableViewCell {
             if success, let data = data {
                 self?.setImage(data: data)
             } else {
-                print("échec")
                 self?.activityIndicator.isHidden = true
             }
         }

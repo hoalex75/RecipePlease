@@ -65,9 +65,12 @@ class RecipePleaseTests: XCTestCase {
     
     func testGivenInt_WhenConvertStringSeconds_ThenConversionIsCorrectlyDone() {
         let number: Int = 140
+        let secondNumber: Int = 120
         
         let result = number.secondsToMinutesString()
+        let resultTwo = secondNumber.secondsToMinutesString()
         
         XCTAssertEqual(result, "2 min 20")
+        XCTAssertEqual(resultTwo, "2 min")
     }
 }

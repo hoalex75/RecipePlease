@@ -29,7 +29,7 @@ class RecipeCD: NSManagedObject {
         }
     }
 
-    static func deleteRecipe(recipe: Recipe, onError: (() -> Void)) {
+    static func deleteRecipe(recipe: Recipe,completionHandler: (() -> Void),onError: (() -> Void)) {
         let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", recipe.id)
 
@@ -41,7 +41,7 @@ class RecipeCD: NSManagedObject {
 
             do {
                 try AppDelegate.viewContext.save()
-                print("delete done")
+                completionHandler()
             } catch {
                 onError()
             }
@@ -51,38 +51,23 @@ class RecipeCD: NSManagedObject {
         }
     }
 
-    func saveARecipe(recipe: Recipe) {
+    func saveARecipe(recipe: Recipe, completionHandler: (() -> Void)? = nil, onError: (() -> Void)? = nil) {
         let recipeImage = RecipeImagesCD(context: AppDelegate.viewContext)
-        recipeImage.smallImageURL = recipe.images[0].hostedSmallUrl?.absoluteString
-        recipeImage.mediumImageURL = recipe.images[0].hostedMediumUrl?.absoluteString
-        recipeImage.largeImageURL = recipe.images[0].hostedLargeUrl?.absoluteString
-        if let iconImage = recipe.images[0].imageUrlsBySize {
-            recipeImage.imageIcon = iconImage["90"]?.absoluteString
-        }
+        recipeImage.initializeRecipeImageWithRecipe(recipe: recipe)
+        toImages = recipeImage
 
         let recipeSource = RecipeSourceCD(context: AppDelegate.viewContext)
-        recipeSource.sourceDisplayName = recipe.source.sourceDisplayName
-        recipeSource.sourceRecipeUrl = recipe.source.sourceRecipeUrl?.absoluteString
-        recipeSource.sourceSiteUrl = recipe.source.sourceSiteUrl?.absoluteString
-
-        id = recipe.id
-        name = recipe.name
-        prepTime = recipe.prepTime
-        cookTime = recipe.cookTime
-        totalTime = recipe.totalTime
-        toImages = recipeImage
+        recipeSource.initializeRecipeSourceWithRecipe(recipe: recipe)
         toSource = recipeSource
-        if let ratingRecipe = recipe.rating {
-            rating = Int16(ratingRecipe)
-        }
 
-        for ingredient in recipe.ingredientLines {
-            let ingredientCD = IngredientsCD(context: AppDelegate.viewContext)
-            ingredientCD.name = ingredient
-            ingredientCD.newRelationship = self
-        }
+        initializeWithRecipe(recipe: recipe)
 
-        try? AppDelegate.viewContext.save()
+        do {
+            try AppDelegate.viewContext.save()
+            completionHandler?()
+        } catch {
+            onError?()
+        }
     }
 
     func convertToRecipe() -> Recipe? {
@@ -110,6 +95,24 @@ class RecipeCD: NSManagedObject {
 
         return tab
     }
+
+    private func initializeWithRecipe(recipe: Recipe) {
+        id = recipe.id
+        name = recipe.name
+        prepTime = recipe.prepTime
+        cookTime = recipe.cookTime
+        totalTime = recipe.totalTime
+
+        if let ratingRecipe = recipe.rating {
+            rating = Int16(ratingRecipe)
+        }
+
+        for ingredient in recipe.ingredientLines {
+            let ingredientCD = IngredientsCD(context: AppDelegate.viewContext)
+            ingredientCD.name = ingredient
+            ingredientCD.newRelationship = self
+        }
+    }
 }
 
 class IngredientsCD: NSManagedObject {
@@ -121,6 +124,15 @@ class RecipeImagesCD: NSManagedObject {
 
         return images
     }
+
+    func initializeRecipeImageWithRecipe(recipe: Recipe) {
+        smallImageURL = recipe.images[0].hostedSmallUrl?.absoluteString
+        mediumImageURL = recipe.images[0].hostedMediumUrl?.absoluteString
+        largeImageURL = recipe.images[0].hostedLargeUrl?.absoluteString
+        if let iconImage = recipe.images[0].imageUrlsBySize {
+            imageIcon = iconImage["90"]?.absoluteString
+        }
+    }
 }
 
 class RecipeSourceCD: NSManagedObject {
@@ -128,5 +140,11 @@ class RecipeSourceCD: NSManagedObject {
         let source = RecipeSource(sourceDisplayName: sourceDisplayName ?? "", sourceSiteUrl: URL(string: sourceSiteUrl ?? ""), sourceRecipeUrl: URL(string: sourceRecipeUrl ?? ""))
 
         return source
+    }
+
+    func initializeRecipeSourceWithRecipe(recipe: Recipe) {
+        sourceDisplayName = recipe.source.sourceDisplayName
+        sourceRecipeUrl = recipe.source.sourceRecipeUrl?.absoluteString
+        sourceSiteUrl = recipe.source.sourceSiteUrl?.absoluteString
     }
 }

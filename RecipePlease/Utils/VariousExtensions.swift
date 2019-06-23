@@ -30,7 +30,11 @@ extension Int {
             return String(format: minutes%60 == 0 ? "%d hr" : "%d hr %d", minutes/60, minutes%60)
         }
         else {
-            return String(format: "%d min %d", minutes, seconds)
+            if seconds == 0 {
+                return String(format: "%d min", minutes)
+            } else {
+                return String(format: "%d min %d", minutes, seconds)
+            }
         }
     }
 }

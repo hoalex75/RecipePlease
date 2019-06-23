@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxCocoa
 import RxSwift
 
 class RecipeViewController: UIViewController, DisplayAlertsInterface {
@@ -23,6 +24,7 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
     var search: SearchServices?
     var recipe: Recipe?
     let disposeBag = DisposeBag()
+    let isPresentInDataBase = BehaviorRelay<Bool>(value: false)
 
     var isInFavorite: Bool? {
         guard let recipe = recipe else { return nil }
@@ -38,6 +40,9 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Recipe"
         bindNavigationItemColor()
+        if let isInFavorite = isInFavorite {
+            isPresentInDataBase.accept(isInFavorite)
+        }
     }
 
     @IBAction func getDirections() {
@@ -49,13 +54,18 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
 
     private func addToFavorites(recipe: Recipe) {
         let recipeCD = RecipeCD(context: AppDelegate.viewContext)
-        recipeCD.saveARecipe(recipe: recipe)
+        recipeCD.saveARecipe(recipe: recipe, completionHandler: { [weak self] in
+            self?.isPresentInDataBase.accept(true)
+        })
     }
 
     private func deleteFromFavorites(recipe: Recipe) {
-        RecipeCD.deleteRecipe(recipe: recipe) {
-            createAndDisplayErrorMessage(message: "An error occured during the delete of your favorite recipe.")
-        }
+        RecipeCD.deleteRecipe(recipe: recipe, completionHandler: { [weak self] in
+                self?.isPresentInDataBase.accept(false)
+            },onError: {
+                createAndDisplayErrorMessage(message: "An error occured during the delete of your favorite recipe.")
+            })
+
     }
 
     @objc private func favTapped() {
@@ -75,16 +85,11 @@ private extension RecipeViewController {
         billboardView.layer.cornerRadius = 5.0
         bindView()
         guard let recipe = recipe else { return }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(favTapped))
-        Settings.shared.isInDarkMode.map { isOn -> String in
-            if isOn {
-                return "OK"
-            } else {
-                return "KO"
-            }
-            }.subscribe(onNext: { [weak self] value in
-                self?.navigationItem.rightBarButtonItem?.title = value
-            }).disposed(by: disposeBag)
+
+        isPresentInDataBase.subscribe(onNext: { [weak self] isPresent in
+            self?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isPresent ? .trash : .save, target: self, action: #selector(self?.favTapped))
+        }).disposed(by: disposeBag)
+
         setImage(with: recipe)
         setTitle(with: recipe)
         setRatings(with: recipe)
