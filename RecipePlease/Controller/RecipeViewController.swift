@@ -65,7 +65,6 @@ class RecipeViewController: UIViewController, DisplayAlertsInterface {
             },onError: {
                 createAndDisplayErrorMessage(message: "An error occured during the delete of your favorite recipe.")
             })
-
     }
 
     @objc private func favTapped() {
@@ -97,7 +96,7 @@ private extension RecipeViewController {
     
     func setImage(with recipe: Recipe) {
         guard let search = search, let url = urlImage(with: recipe) else {
-            //TODO Image par défaut
+            recipeImageVIew.image = UIImage(named: "Clock")
             return
         }
         search.getImage(imageURL: url) { [weak self] success, data in

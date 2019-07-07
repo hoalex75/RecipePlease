@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Alamofire
 
 public class SearchServices: YummlyIdentifiers {
     var yummlyAccess: YummlyAccess
@@ -29,36 +29,63 @@ public class SearchServices: YummlyIdentifiers {
     func getResultsWithIngredients(ingredients: [String], completionHandler: @escaping (Bool, Result?) -> Void) {
         var body = "?_app_id=\(yummlyAccess.appId)&_app_key=\(yummlyAccess.appKey)"
         body += formatingIngredients(ingredients: ingredients)
+
         let urlOnWhichRequest = URL(string: stringURLSearchForRecipes + body)
         guard let url = urlOnWhichRequest else { return }
-        print(url)
-        task?.cancel()
-        task = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
+        Alamofire.request(url).response(completionHandler: { [weak self] response in
             DispatchQueue.main.async {
-                guard let data = data, error == nil else {
-                    if let error = error {
+                guard let data = response.data, response.error == nil else {
+                    if let error = response.error {
                         print(error)
                     }
                     completionHandler(false, nil)
                     return
                 }
-                
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+
+                guard let response = response.response, response.statusCode == 200 else {
                     completionHandler(false, nil)
                     return
                 }
-                
+
                 guard let result = try? JSONDecoder().decode(Result.self, from: data) else {
                     completionHandler(false, nil)
                     return
                 }
-                
+
                 self?.storage.result = result
                 self?.storage.ingredientHaveChanged = false
                 completionHandler(true, result)
             }
         })
-        task?.resume()
+
+//        print(url)
+//        task?.cancel()
+//        task = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
+//            DispatchQueue.main.async {
+//                guard let data = data, error == nil else {
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                    completionHandler(false, nil)
+//                    return
+//                }
+//
+//                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                    completionHandler(false, nil)
+//                    return
+//                }
+//
+//                guard let result = try? JSONDecoder().decode(Result.self, from: data) else {
+//                    completionHandler(false, nil)
+//                    return
+//                }
+//
+//                self?.storage.result = result
+//                self?.storage.ingredientHaveChanged = false
+//                completionHandler(true, result)
+//            }
+//        })
+//        task?.resume()
     }
     
     func getImage(imageURL: URL,callback: @escaping (Bool, Data?) -> Void) {

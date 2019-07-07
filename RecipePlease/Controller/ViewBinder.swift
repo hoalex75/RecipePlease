@@ -15,6 +15,7 @@ protocol ViewBinder {
 
     func bindBackgrounds(backgroundView: UIView?, tableView: UITableView?, textView: UITextView?)
     func bindTextColors(labels: [UILabel], textView: UITextView?)
+    func bindButtonsColors(buttons: [UIButton])
 }
 
 extension ViewBinder {

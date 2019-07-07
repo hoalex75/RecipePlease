@@ -6,6 +6,7 @@ use_frameworks!
 target 'RecipePlease' do
     pod 'RxSwift', '~> 4.5'
     pod 'RxCocoa', '~> 4.5'
+    pod 'Alamofire', '~> 4.5'
 end
 
 # RxTest and RxBlocking make the most sense in the context of unit/integration tests

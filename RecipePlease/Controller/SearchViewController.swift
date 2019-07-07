@@ -96,8 +96,6 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
         
         if ingredients.count > 0 {
             searchWithIngredients(ingredients)
-        } else {
-            // TODO: ALERT
         }
     }
     
@@ -109,7 +107,7 @@ class SearchViewController: UIViewController, DisplayAlertsInterface {
             if success {
                 self?.showResults()
             } else {
-                self?.createAndDisplayErrorMessage(message: "An error occured during the loadings of your search's results.")
+                self?.createAndDisplayErrorMessage(message: "An error occured during the loading of your search's results.")
             }
             self?.toggleActivityIndicator(shown: true)
         }
