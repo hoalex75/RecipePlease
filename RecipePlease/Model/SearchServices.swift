@@ -12,14 +12,18 @@ import Foundation
 public class SearchServices: YummlyIdentifiers {
     var yummlyAccess: YummlyAccess
     private var task: URLSessionDataTask?
-    private let session = URLSession(configuration: .default)
+    private var session = URLSession(configuration: .default)
     private let stringURLSearchForRecipes = "https://api.yummly.com/v1/api/recipes"
     // recipeId, appID, appKey
     private let stringURLDisplayRecipe = "https://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@"
     var storage: Storage
     
-    init(storage: Storage) {
+    init(storage: Storage, session: URLSession? = nil) {
         self.storage = storage
+        if let session = session {
+            self.session = session
+        }
+
         yummlyAccess = YummlyAccess(appId: "", appKey: "")
         if let yumm = self.getAccess() {
             yummlyAccess = yumm
@@ -71,7 +75,6 @@ public class SearchServices: YummlyIdentifiers {
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                     callback(false, nil)
-                    print("ici2")
                     return
                 }
                 

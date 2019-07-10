@@ -11,10 +11,9 @@ import XCTest
 
 class RecipePleaseTests: XCTestCase {
     var storage = Storage()
-    var search: SearchServices = SearchServices(storage: Storage())
     
     override func setUp() {
-        search = SearchServices(storage: storage)
+        storage = Storage()
     }
 
     func testGivenYummlyInstance_WhenGetAccess_ThenAccessAreCorrect() {
@@ -49,7 +48,8 @@ class RecipePleaseTests: XCTestCase {
     
     func testGivenArrayOfIngredientsNotFormated_WhenFormating_ThenResultIsFormatedForRequest() {
         let ingredientTab = ["Soup", "Onion Soup", "Garlic Cloves", "Cognac"]
-        
+
+        let search = SearchServices(storage: storage)
         let result = search.formatingIngredients(ingredients: ingredientTab)
         
         XCTAssertEqual(result, "&allowedIngredient[]=soup&allowedIngredient[]=onion%20soup&allowedIngredient[]=garlic%20cloves&allowedIngredient[]=cognac")
@@ -72,5 +72,143 @@ class RecipePleaseTests: XCTestCase {
         
         XCTAssertEqual(result, "2 min 20")
         XCTAssertEqual(resultTwo, "2 min")
+    }
+
+    // MARK: -GetResults Services
+    func testGetResultsServiceWithCorrectDatas() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseOK, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(success)
+            XCTAssertNotNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetResultsServiceWithIncorrectDatas() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.incorrectData, response: FakeResponseData.responseOK, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetResultsServiceWithResponseKO() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseKO, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetResultsServiceWithError() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseOK, error: FakeResponseData.error)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    // MARK: -GetRecipe Services
+    func testGetRecipeServiceWithCorrectData() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseOK, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(success)
+            XCTAssertNotNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetRecipeServiceWithIncorrectData() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.incorrectData, response: FakeResponseData.responseOK, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetRecipeServiceWithResponseKO() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseKO, error: nil)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+
+    func testGetRecipeServiceWithError() {
+        FakeResponseData.requestType = .recipeResults
+        let sessionFake = URLSessionFake(data: FakeResponseData.correctData, response: FakeResponseData.responseOK, error: FakeResponseData.error)
+
+        let searchService = SearchServices(storage: storage, session: sessionFake)
+
+        let expectation = XCTestExpectation(description: "Wait for queue change")
+        searchService.getResultsWithIngredients(ingredients: ["onion", "soup"]) { success, result in
+            XCTAssert(!success)
+            XCTAssertNil(result)
+            expectation.fulfill()
+
+        }
+
+        wait(for: [expectation], timeout: 0.1)
     }
 }
